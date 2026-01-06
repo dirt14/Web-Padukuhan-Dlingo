@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          String    @default("KARANG_TARUNA") // ADMIN (Pak Dukuh) or KARANG_TARUNA
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  announcements Announcement[]
+  activities    Activity[]
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  excerpt     String?
+  image       String?
+  category    String   // BANTUAN_SOSIAL, KESEHATAN, KEGIATAN_DUSUN, UMUM
+  priority    String   @default("NORMAL") // NORMAL, IMPORTANT
+  showAsNotification Boolean @default(false)
+  notificationStart DateTime?
+  notificationEnd   DateTime?
+  status      String   @default("DRAFT") // DRAFT, PUBLISHED
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  content     String?
+  image       String?
+  category    String   // BANK_SAMPAH, PENGAJIAN, KARANG_TARUNA, LAINNYA
+  schedule    String?
+  location    String?
+  responsible String?
+  status      String   @default("PUBLISHED") // DRAFT, PUBLISHED
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  photos      Photo[]
+}
+
+model Photo {
+  id          String   @id @default(cuid())
+  url         String
+  caption     String?
+  category    String?
+  albumId     String?
+  album       Album?   @relation(fields: [albumId], references: [id])
+  activityId  String?
+  activity    Activity? @relation(fields: [activityId], references: [id])
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Album {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  coverImage  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  photos      Photo[]
+}
+
+model VillageProfile {
+  id          String   @id @default(cuid())
+  vision      String
+  mission     String
+  history     String?
+  address     String
+  mapEmbed    String?
+  mapLat      String?
+  mapLng      String?
+  phone       String?
+  email       String?
+  socialMedia String?  // JSON string
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OrganizationMember {
+  id          String   @id @default(cuid())
+  name        String
+  position    String
+  image       String?
+  phone       String?
+  order       Int      @default(0)
+  type        String   @default("VILLAGE") // VILLAGE or KARANG_TARUNA
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model KarangTarunaProfile {
+  id          String   @id @default(cuid())
+  vision      String
+  mission     String
+  description String?
+  workProgram String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  title       String
+  message     String
+  link        String?
+  type        String    @default("INFO") // INFO, WARNING, URGENT
+  active      Boolean   @default(true)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model SiteSettings {
+  id          String   @id @default(cuid())
+  logo        String?
+  siteName    String   @default("Dusun Dlingo")
+  tagline     String?
+  heroImage   String?
+  heroTitle   String?
+  heroSubtitle String?
+  footerText  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
