@@ -51,7 +51,7 @@ export default async function HomePage() {
               </Link>
               <Link
                 href="/profil/visi-misi"
-                className="btn-secondary border-white text-white hover:bg-white/10"
+                className="border border-white text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 inline-flex items-center justify-center bg-transparent hover:bg-white/10"
               >
                 Tentang Dusun
               </Link>
@@ -283,19 +283,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white">Ada Pertanyaan?</h2>
-          <p className="mt-4 text-primary-100 max-w-2xl mx-auto">
-            Hubungi kami untuk informasi lebih lanjut tentang kegiatan dan layanan di Dusun Dlingo
-          </p>
-          <Link href="/kontak" className="btn-primary bg-white text-primary-600 hover:bg-primary-50 mt-8">
-            Hubungi Kami
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
-      </section>
     </div>
   )
 }

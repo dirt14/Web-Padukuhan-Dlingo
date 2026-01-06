@@ -20,7 +20,8 @@ export default async function PetaPage() {
   const profile = await getProfile()
 
   const defaultAddress = 'Dusun Dlingo, Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta'
-  const defaultMapEmbed = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31611.891835066867!2d110.41!3d-7.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sDlingo!5e0!3m2!1sen!2sid!4v1234567890'
+  const defaultMapEmbed = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.123456789!2d110.4589936!3d-7.8834629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5d1234567890%3A0x1234567890abcdef!2sDlingo%2C%20Kec.%20Dlingo%2C%20Kabupaten%20Bantul%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1704500000000!5m2!1sid!2sid'
+  const googleMapsLink = 'https://maps.app.goo.gl/uhG1RJsNNMJhgdcA8'
 
   const address = profile?.address || defaultAddress
   const mapEmbed = profile?.mapEmbed || defaultMapEmbed
@@ -100,7 +101,7 @@ export default async function PetaPage() {
                     Lanjutkan perjalanan ke arah timur menuju Kecamatan Dlingo.
                   </p>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                    href={googleMapsLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary text-sm"
