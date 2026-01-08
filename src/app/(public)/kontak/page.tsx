@@ -26,7 +26,7 @@ async function getData() {
 export default async function KontakPage() {
   const { profile, ktMembers } = await getData()
 
-  const defaultAddress = 'Dusun Dlingo, Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta'
+  const defaultAddress = 'Dusun Dlingo, Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta'
   const defaultPhone = '+62 812 3456 7890'
   const defaultEmail = 'dusundlingo@gmail.com'
   const defaultMapEmbed = 'https://maps.google.com/maps?q=-7.8063991,110.1834431&hl=en&z=15&output=embed'
