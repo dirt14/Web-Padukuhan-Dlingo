@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { MapPin, Phone, Mail, Clock, MessageCircle, User } from 'lucide-react'
+import { MapPin, Phone, Mail, MessageCircle, User } from 'lucide-react'
 import prisma from '@/lib/db'
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default async function KontakPage() {
   const defaultAddress = 'Dusun Dlingo, Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta'
   const defaultPhone = '+62 812 3456 7890'
   const defaultEmail = 'dusundlingo@gmail.com'
-  const defaultMapEmbed = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31611.891835066867!2d110.41!3d-7.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sDlingo!5e0!3m2!1sen!2sid!4v1234567890'
+  const defaultMapEmbed = 'https://maps.google.com/maps?q=-7.8063991,110.1834431&hl=en&z=15&output=embed'
 
   return (
     <div className="py-12">
@@ -108,9 +108,9 @@ export default async function KontakPage() {
               </div>
             </div>
 
-            {/* Address & Hours */}
+            {/* Address */}
             <div className="card p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Alamat & Jam Operasional</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-6">Alamat</h2>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -119,19 +119,6 @@ export default async function KontakPage() {
                   <div>
                     <p className="text-sm text-gray-500">Alamat Sekretariat</p>
                     <p className="font-medium text-gray-900">{profile?.address || defaultAddress}</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-6 w-6 text-red-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Jam Operasional</p>
-                    <div className="font-medium text-gray-900">
-                      <p>Senin - Jumat: 08:00 - 16:00 WIB</p>
-                      <p>Sabtu: 08:00 - 12:00 WIB</p>
-                      <p>Minggu: Tutup</p>
-                    </div>
                   </div>
                 </div>
               </div>
