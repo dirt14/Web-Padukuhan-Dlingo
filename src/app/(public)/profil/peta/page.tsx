@@ -19,7 +19,7 @@ async function getProfile() {
 export default async function PetaPage() {
   const profile = await getProfile()
 
-  const defaultAddress = 'Dusun Dlingo, Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta'
+  const defaultAddress = 'Dusun Dlingo, Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta'
   const defaultMapEmbed = 'https://maps.google.com/maps?q=-7.8063991,110.1834431&hl=en&z=15&output=embed'
 
   const address = profile?.address || defaultAddress
