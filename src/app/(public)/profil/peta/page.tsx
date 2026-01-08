@@ -96,8 +96,8 @@ export default async function PetaPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Petunjuk Arah</h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    Dari pusat Kota Yogyakarta, ambil arah selatan menuju Bantul.
-                    Lanjutkan perjalanan ke arah timur menuju Kecamatan Dlingo.
+                    Dari pusat Kota Yogyakarta, ambil arah barat menuju Kabupaten Kulon Progo.
+                    Lanjutkan perjalanan menuju Kecamatan Nanggulan, Desa Banyuroto.
                   </p>
                   <a
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
