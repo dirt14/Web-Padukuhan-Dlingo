@@ -147,3 +147,121 @@ model SiteSettings {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+// Demografi & Statistik
+model Demographics {
+  id              String   @id @default(cuid())
+  year            Int
+  totalPopulation Int
+  maleCount       Int
+  femaleCount     Int
+  ageData         String   // JSON: [{ageGroup: "0-5", count: 100}, ...]
+  educationData   String   // JSON: [{level: "SD", count: 200}, ...]
+  occupationData  String   // JSON: [{type: "Petani", count: 150}, ...]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Forum/Diskusi
+model ForumCategory {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  icon        String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  topics      ForumTopic[]
+}
+
+model ForumTopic {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  content     String
+  categoryId  String
+  category    ForumCategory @relation(fields: [categoryId], references: [id])
+  authorName  String
+  authorEmail String?
+  views       Int           @default(0)
+  isPinned    Boolean       @default(false)
+  isLocked    Boolean       @default(false)
+  status      String        @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  replies     ForumReply[]
+}
+
+model ForumReply {
+  id          String     @id @default(cuid())
+  content     String
+  topicId     String
+  topic       ForumTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  authorName  String
+  authorEmail String?
+  status      String     @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// Kotak Saran
+model Suggestion {
+  id          String   @id @default(cuid())
+  name        String
+  email       String?
+  phone       String?
+  category    String   // INFRASTRUKTUR, PELAYANAN, KEGIATAN, LAINNYA
+  subject     String
+  message     String
+  status      String   @default("PENDING") // PENDING, REVIEWED, RESPONDED
+  response    String?
+  respondedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// FAQ
+model FAQ {
+  id          String   @id @default(cuid())
+  question    String
+  answer      String
+  category    String   // ADMINISTRASI, PELAYANAN, KEGIATAN, UMUM
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Portal Edukasi & Artikel
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  excerpt     String?
+  image       String?
+  category    String   // KESEHATAN, PERTANIAN, KEWIRAUSAHAAN, PENDIDIKAN, LAINNYA
+  tags        String?  // JSON array
+  views       Int      @default(0)
+  status      String   @default("DRAFT") // DRAFT, PUBLISHED
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Perpustakaan Digital
+model Document {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileUrl     String
+  fileName    String
+  fileSize    Int?     // in bytes
+  fileType    String?  // pdf, doc, xls, etc
+  category    String   // PERATURAN, SURAT_KETERANGAN, FORMULIR, PANDUAN, LAINNYA
+  downloads   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

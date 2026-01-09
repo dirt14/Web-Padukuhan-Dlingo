@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
-import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, UserCircle } from 'lucide-react'
+import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, UserCircle, BarChart3, BookOpen, FileText, MessageSquare, HelpCircle } from 'lucide-react'
 
 const navigation = [
   { name: 'Beranda', href: '/', icon: Home },
@@ -17,6 +17,16 @@ const navigation = [
     ],
   },
   {
+    name: 'Data & Informasi',
+    icon: BarChart3,
+    children: [
+      { name: 'Demografi', href: '/data/demografi' },
+      { name: 'FAQ', href: '/informasi/faq' },
+      { name: 'Kotak Saran', href: '/informasi/saran' },
+      { name: 'Dokumen', href: '/informasi/dokumen' },
+    ],
+  },
+  {
     name: 'Kegiatan',
     icon: Calendar,
     children: [
@@ -26,10 +36,11 @@ const navigation = [
       { name: 'Semua Kegiatan', href: '/kegiatan' },
     ],
   },
+  { name: 'Portal Edukasi', href: '/edukasi', icon: BookOpen },
+  { name: 'Forum', href: '/forum', icon: MessageSquare },
   { name: 'Pengumuman', href: '/pengumuman', icon: Bell },
   { name: 'Galeri', href: '/galeri', icon: ImageIcon },
   { name: 'Kontak', href: '/kontak', icon: Phone },
-  { name: 'Karang Taruna', href: '/karang-taruna', icon: UserCircle },
 ]
 
 export default function Navbar() {
