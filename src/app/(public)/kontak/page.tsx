@@ -26,10 +26,9 @@ async function getData() {
 export default async function KontakPage() {
   const { profile, ktMembers } = await getData()
 
-  const defaultAddress = 'Dusun Dlingo, Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta'
+  const defaultAddress = 'Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta 55671'
   const defaultPhone = '+62 812 3456 7890'
   const defaultEmail = 'dusundlingo@gmail.com'
-  const defaultMapEmbed = 'https://maps.google.com/maps?q=-7.8063991,110.1834431&hl=en&z=15&output=embed'
 
   return (
     <div className="py-12">
@@ -42,8 +41,7 @@ export default async function KontakPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+        <div className="max-w-3xl mx-auto">
           <div className="space-y-6">
             {/* Pak Dukuh */}
             <div className="card p-6">
@@ -121,24 +119,6 @@ export default async function KontakPage() {
                     <p className="font-medium text-gray-900">{profile?.address || defaultAddress}</p>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Map */}
-          <div className="space-y-6">
-            <div className="card overflow-hidden">
-              <div className="aspect-[4/3]">
-                <iframe
-                  src={profile?.mapEmbed || defaultMapEmbed}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Peta Lokasi Dusun Dlingo"
-                ></iframe>
               </div>
             </div>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Phone, Mail } from 'lucide-react'
 
 export default function Footer() {
@@ -10,10 +11,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <Image
+                src="/images/logo_dusun.svg"
+                alt="Logo Dusun Dlingo"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
               <span className="text-xl font-bold text-white">Dusun Dlingo</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
@@ -59,7 +64,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">Dusun Dlingo, Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, DIY</span>
+                <span className="text-sm">Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, DIY 55671</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary-400 flex-shrink-0" />

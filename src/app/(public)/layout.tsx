@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import NotificationBanner from '@/components/NotificationBanner'
+import FontSizeControl from '@/components/FontSizeControl'
 import prisma from '@/lib/db'
 
 async function getNotifications() {
@@ -43,6 +44,7 @@ export default async function PublicLayout({
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
+      <FontSizeControl />
     </div>
   )
 }

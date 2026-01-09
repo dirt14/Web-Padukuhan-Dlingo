@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Calendar, Bell, Users, Recycle, BookOpen } from 'lucide-react'
 import prisma from '@/lib/db'
 import { formatDate, truncate, getCategoryLabel } from '@/lib/utils'
@@ -230,7 +231,7 @@ export default async function HomePage() {
             <div>
               <h2 className="section-title">Tentang Dusun Dlingo</h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                {profile?.history || 'Dusun Dlingo adalah sebuah dusun yang terletak di Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.'}
+                {profile?.history || 'Dusun Dlingo adalah sebuah dusun yang terletak di Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.'}
               </p>
               <div className="mt-6 space-y-4">
                 <div className="flex items-start space-x-3">
@@ -267,15 +268,19 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white p-8">
-                    <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-5xl font-bold">D</span>
-                    </div>
-                    <h3 className="text-2xl font-bold">Dusun Dlingo</h3>
-                    <p className="mt-2 text-primary-100">Bersama Membangun Dusun</p>
+              <div className="aspect-square rounded-2xl overflow-hidden flex items-center justify-center">
+                <div className="text-center p-8">
+                  <div className="w-64 h-64 flex items-center justify-center mx-auto mb-6">
+                    <Image
+                      src="/images/logo_dusun.svg"
+                      alt="Logo Dusun Dlingo"
+                      width={256}
+                      height={256}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Dusun Dlingo</h3>
+                  <p className="mt-2 text-gray-600">Bersama Membangun Dusun</p>
                 </div>
               </div>
             </div>

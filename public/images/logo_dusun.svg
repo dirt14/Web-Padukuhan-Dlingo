@@ -1,0 +1,260 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0.1" />
+    </linearGradient>
+    
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5BA3E8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E5C8A;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#87CEEB;stop-opacity:0" />
+    </radialGradient>
+    
+    <linearGradient id="leafGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3A7BC8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5BA3E8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="200" cy="200" r="195" fill="url(#skyGradient)"/>
+  
+  <!-- Center Glow -->
+  <circle cx="200" cy="200" r="150" fill="url(#centerGlow)"/>
+  
+  <!-- Decorative Outer Ring -->
+  <circle cx="200" cy="200" r="185" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.3"/>
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#blueGradient)" stroke-width="4"/>
+  
+  <!-- Decorative dots on ring -->
+  <circle cx="200" cy="15" r="4" fill="#4A90E2"/>
+  <circle cx="200" cy="385" r="4" fill="#4A90E2"/>
+  <circle cx="15" cy="200" r="4" fill="#4A90E2"/>
+  <circle cx="385" cy="200" r="4" fill="#4A90E2"/>
+  
+  <!-- Mountain silhouette in background (subtle) -->
+  <path d="M 80 240 L 120 200 L 140 215 L 170 180 L 200 200 L 230 180 L 260 215 L 280 200 L 320 240 Z" fill="#4A90E2" opacity="0.1"/>
+  
+  <!-- Ground/Base -->
+  <ellipse cx="200" cy="245" rx="85" ry="8" fill="#4A90E2" opacity="0.15"/>
+  
+  <!-- Left Rice Stalks Group -->
+  <g id="rice-left-detailed">
+    <!-- Stalk 1 -->
+    <path d="M 95 230 Q 90 210 92 190 Q 93 170 90 150" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="86" cy="155" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="85" cy="163" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="86" cy="171" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="87" cy="179" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="88" cy="187" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="89" cy="195" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="90" cy="203" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <!-- Leaves -->
+    <path d="M 92 180 Q 80 175 75 178" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    <path d="M 91 190 Q 79 188 74 192" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    <path d="M 90 200 Q 78 200 73 205" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    
+    <!-- Stalk 2 -->
+    <path d="M 110 235 Q 107 215 108 195 Q 109 175 107 155" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="103" cy="160" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="103" cy="168" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="104" cy="176" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="105" cy="184" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="106" cy="192" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="107" cy="200" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="108" cy="208" rx="4" ry="6" fill="#4A90E2"/>
+    <path d="M 108 185 Q 96 182 91 186" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    <path d="M 107 195 Q 95 194 90 199" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    
+    <!-- Stalk 3 -->
+    <path d="M 125 232 Q 123 212 124 192 Q 125 172 123 152" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="119" cy="157" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="119" cy="165" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="120" cy="173" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="121" cy="181" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="122" cy="189" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="123" cy="197" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="124" cy="205" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+  </g>
+  
+  <!-- Right Rice Stalks Group -->
+  <g id="rice-right-detailed">
+    <!-- Stalk 1 -->
+    <path d="M 305 230 Q 310 210 308 190 Q 307 170 310 150" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="314" cy="155" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="315" cy="163" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="314" cy="171" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="313" cy="179" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="312" cy="187" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="311" cy="195" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="310" cy="203" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <path d="M 308 180 Q 320 175 325 178" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    <path d="M 309 190 Q 321 188 326 192" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    <path d="M 310 200 Q 322 200 327 205" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    
+    <!-- Stalk 2 -->
+    <path d="M 290 235 Q 293 215 292 195 Q 291 175 293 155" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="297" cy="160" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="297" cy="168" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="296" cy="176" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="295" cy="184" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="294" cy="192" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="293" cy="200" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="292" cy="208" rx="4" ry="6" fill="#4A90E2"/>
+    <path d="M 292 185 Q 304 182 309 186" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    <path d="M 293 195 Q 305 194 310 199" fill="none" stroke="#4A90E2" stroke-width="1.5"/>
+    
+    <!-- Stalk 3 -->
+    <path d="M 275 232 Q 277 212 276 192 Q 275 172 277 152" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="281" cy="157" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="281" cy="165" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="280" cy="173" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="279" cy="181" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="278" cy="189" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+    <ellipse cx="277" cy="197" rx="4" ry="6" fill="#4A90E2"/>
+    <ellipse cx="276" cy="205" rx="4" ry="6" fill="#5BA3E8" opacity="0.9"/>
+  </g>
+  
+  <!-- Coconut Tree (Center - More Detailed) -->
+  <g id="coconut-tree-detailed">
+    <!-- Trunk base shadow -->
+    <ellipse cx="200" cy="240" rx="8" ry="3" fill="#4A90E2" opacity="0.2"/>
+    
+    <!-- Trunk with texture -->
+    <path d="M 198 240 Q 195 210 196 180 Q 197 150 195 120 Q 194 100 195 85" 
+          fill="none" stroke="url(#blueGradient)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M 202 240 Q 205 210 204 180 Q 203 150 205 120 Q 206 100 205 85" 
+          fill="none" stroke="url(#blueGradient)" stroke-width="7" stroke-linecap="round"/>
+    
+    <!-- Trunk texture lines -->
+    <line x1="195" y1="230" x2="205" y2="230" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="215" x2="205" y2="215" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="200" x2="205" y2="200" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="185" x2="205" y2="185" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="170" x2="205" y2="170" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="155" x2="205" y2="155" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="140" x2="205" y2="140" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="125" x2="205" y2="125" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="110" x2="205" y2="110" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="95" x2="205" y2="95" stroke="#2E5C8A" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Coconut cluster -->
+    <circle cx="188" cy="92" r="7" fill="#4A90E2" opacity="0.8"/>
+    <circle cx="188" cy="92" r="6" fill="#5BA3E8"/>
+    
+    <circle cx="200" cy="88" r="8" fill="#3A7BC8" opacity="0.8"/>
+    <circle cx="200" cy="88" r="7" fill="#4A90E2"/>
+    
+    <circle cx="212" cy="92" r="7" fill="#4A90E2" opacity="0.8"/>
+    <circle cx="212" cy="92" r="6" fill="#5BA3E8"/>
+    
+    <circle cx="195" cy="98" r="6" fill="#3A7BC8" opacity="0.7"/>
+    <circle cx="205" cy="98" r="6" fill="#3A7BC8" opacity="0.7"/>
+    
+    <!-- Palm Fronds - Left Side (more detailed) -->
+    <g id="left-fronds">
+      <!-- Frond 1 -->
+      <path d="M 200 85 Q 170 75 140 70" fill="none" stroke="url(#leafGradient)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 170 75 L 165 72" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 165 75 L 160 71" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 160 75 L 155 70" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 155 74 L 150 68" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 150 73 L 145 67" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 175 76 L 170 80" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 170 76 L 165 81" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 165 76 L 160 82" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 160 76 L 155 83" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 155 75 L 150 84" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      
+      <!-- Frond 2 -->
+      <path d="M 200 85 Q 175 65 155 55" fill="none" stroke="url(#leafGradient)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 185 73 L 182 68" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 180 70 L 177 65" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 175 67 L 172 62" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 170 64 L 167 59" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 165 61 L 162 56" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 185 75 L 182 80" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 180 72 L 177 77" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 175 69 L 172 74" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 170 66 L 167 71" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      
+      <!-- Frond 3 -->
+      <path d="M 200 85 Q 185 55 175 40" fill="none" stroke="url(#leafGradient)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 193 70 L 191 65" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 190 65 L 188 60" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 187 60 L 185 55" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 184 55 L 182 50" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 181 50 L 179 45" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 193 72 L 191 77" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 190 67 L 188 72" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 187 62 L 185 67" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 184 57 L 182 62" fill="none" stroke="#4A90E2" stroke-width="2"/>
+    </g>
+    
+    <!-- Palm Fronds - Right Side (more detailed) -->
+    <g id="right-fronds">
+      <!-- Frond 1 -->
+      <path d="M 200 85 Q 230 75 260 70" fill="none" stroke="url(#leafGradient)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 230 75 L 235 72" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 235 75 L 240 71" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 240 75 L 245 70" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 245 74 L 250 68" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 250 73 L 255 67" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 225 76 L 230 80" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 230 76 L 235 81" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 235 76 L 240 82" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 240 76 L 245 83" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 245 75 L 250 84" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      
+      <!-- Frond 2 -->
+      <path d="M 200 85 Q 225 65 245 55" fill="none" stroke="url(#leafGradient)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 215 73 L 218 68" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 220 70 L 223 65" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 225 67 L 228 62" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 230 64 L 233 59" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 235 61 L 238 56" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 215 75 L 218 80" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 220 72 L 223 77" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 225 69 L 228 74" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 230 66 L 233 71" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      
+      <!-- Frond 3 -->
+      <path d="M 200 85 Q 215 55 225 40" fill="none" stroke="url(#leafGradient)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 207 70 L 209 65" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 210 65 L 212 60" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 213 60 L 215 55" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 216 55 L 218 50" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 219 50 L 221 45" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 207 72 L 209 77" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 210 67 L 212 72" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 213 62 L 215 67" fill="none" stroke="#4A90E2" stroke-width="2"/>
+      <path d="M 216 57 L 218 62" fill="none" stroke="#4A90E2" stroke-width="2"/>
+    </g>
+  </g>
+  
+  <!-- Decorative border pattern -->
+  <circle cx="200" cy="50" r="3" fill="#4A90E2" opacity="0.5"/>
+  <circle cx="150" cy="65" r="2" fill="#4A90E2" opacity="0.5"/>
+  <circle cx="250" cy="65" r="2" fill="#4A90E2" opacity="0.5"/>
+  <circle cx="120" cy="100" r="2" fill="#4A90E2" opacity="0.5"/>
+  <circle cx="280" cy="100" r="2" fill="#4A90E2" opacity="0.5"/>
+  
+  <!-- Text "DLINGO" with shadow -->
+  <text x="202" y="292" font-family="'Arial Black', Arial, sans-serif" font-size="46" font-weight="900" fill="#2E5C8A" text-anchor="middle" letter-spacing="3" opacity="0.3">DLINGO</text>
+  <text x="200" y="290" font-family="'Arial Black', Arial, sans-serif" font-size="46" font-weight="900" fill="url(#blueGradient)" text-anchor="middle" letter-spacing="3">DLINGO</text>
+  
+  <!-- Subtitle with decorative lines -->
+  <line x1="130" y1="308" x2="155" y2="308" stroke="#4A90E2" stroke-width="1.5" opacity="0.6"/>
+  <line x1="245" y1="308" x2="270" y2="308" stroke="#4A90E2" stroke-width="1.5" opacity="0.6"/>
+  <text x="200" y="312" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#4A90E2" text-anchor="middle" letter-spacing="3">PADUKUHAN</text>
+  
+  <!-- Location subtitle -->
+  <text x="200" y="330" font-family="Arial, sans-serif" font-size="10" font-weight="400" fill="#4A90E2" text-anchor="middle" letter-spacing="1" opacity="0.7">BANYUROTO • KULON PROGO</text>
+</svg>

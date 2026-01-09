@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image, Phone, UserCircle } from 'lucide-react'
+import Image from 'next/image'
+import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, UserCircle } from 'lucide-react'
 
 const navigation = [
   { name: 'Beranda', href: '/', icon: Home },
@@ -13,7 +14,6 @@ const navigation = [
     children: [
       { name: 'Visi & Misi', href: '/profil/visi-misi' },
       { name: 'Struktur Organisasi', href: '/profil/struktur' },
-      { name: 'Peta Lokasi', href: '/profil/peta' },
     ],
   },
   {
@@ -27,7 +27,7 @@ const navigation = [
     ],
   },
   { name: 'Pengumuman', href: '/pengumuman', icon: Bell },
-  { name: 'Galeri', href: '/galeri', icon: Image },
+  { name: 'Galeri', href: '/galeri', icon: ImageIcon },
   { name: 'Kontak', href: '/kontak', icon: Phone },
   { name: 'Karang Taruna', href: '/karang-taruna', icon: UserCircle },
 ]
@@ -47,10 +47,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
-              </div>
+            <Link href="/" className="flex items-center space-x-3">
+              <Image
+                src="/images/logo_dusun.svg"
+                alt="Logo Dusun Dlingo"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
               <span className="text-xl font-bold text-gray-900">Dusun Dlingo</span>
             </Link>
           </div>
