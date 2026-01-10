@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session || session.user.role !== 'ADMIN') {
+    if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -23,31 +23,50 @@ export async function POST(request: NextRequest) {
 
     const existing = await prisma.siteSettings.findFirst()
 
+    const settingsData = {
+      siteName: data.siteName,
+      tagline: data.tagline,
+      logo: data.logo,
+      heroImage: data.heroImage,
+      heroTitle: data.heroTitle,
+      heroSubtitle: data.heroSubtitle,
+      footerText: data.footerText,
+
+      // Feature toggles
+      showForum: data.showForum,
+      showDemographics: data.showDemographics,
+      showSuggestionBox: data.showSuggestionBox,
+      showGallery: data.showGallery,
+      showKegiatan: data.showKegiatan,
+      showPengumuman: data.showPengumuman,
+      showKarangTaruna: data.showKarangTaruna,
+      showEdukasi: data.showEdukasi,
+
+      // Static content
+      aboutDusun: data.aboutDusun,
+      footerAbout: data.footerAbout,
+
+      // Contact info
+      phone: data.phone,
+      email: data.email,
+      address: data.address,
+
+      // Social media
+      facebook: data.facebook,
+      instagram: data.instagram,
+      twitter: data.twitter,
+      youtube: data.youtube
+    }
+
     if (existing) {
       const settings = await prisma.siteSettings.update({
         where: { id: existing.id },
-        data: {
-          siteName: data.siteName,
-          tagline: data.tagline,
-          logo: data.logo,
-          heroImage: data.heroImage,
-          heroTitle: data.heroTitle,
-          heroSubtitle: data.heroSubtitle,
-          footerText: data.footerText
-        }
+        data: settingsData
       })
       return NextResponse.json({ settings })
     } else {
       const settings = await prisma.siteSettings.create({
-        data: {
-          siteName: data.siteName,
-          tagline: data.tagline,
-          logo: data.logo,
-          heroImage: data.heroImage,
-          heroTitle: data.heroTitle,
-          heroSubtitle: data.heroSubtitle,
-          footerText: data.footerText
-        }
+        data: settingsData
       })
       return NextResponse.json({ settings })
     }

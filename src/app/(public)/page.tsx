@@ -231,7 +231,7 @@ export default async function HomePage() {
             <div>
               <h2 className="section-title">Tentang Dusun Dlingo</h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                {profile?.history || 'Dusun Dlingo adalah sebuah dusun yang terletak di Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.'}
+                {settings?.aboutDusun || profile?.history || 'Dusun Dlingo adalah sebuah dusun yang terletak di Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.'}
               </p>
               <div className="mt-6 space-y-4">
                 <div className="flex items-start space-x-3">

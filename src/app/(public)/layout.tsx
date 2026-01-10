@@ -31,19 +31,29 @@ async function getNotifications() {
   }
 }
 
+async function getSiteSettings() {
+  try {
+    const settings = await prisma.siteSettings.findFirst()
+    return settings
+  } catch {
+    return null
+  }
+}
+
 export default async function PublicLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   const notifications = await getNotifications()
+  const settings = await getSiteSettings()
 
   return (
     <div className="min-h-screen flex flex-col">
       <NotificationBanner notifications={notifications} />
-      <Navbar />
+      <Navbar settings={settings} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer settings={settings} />
       <FontSizeControl />
     </div>
   )

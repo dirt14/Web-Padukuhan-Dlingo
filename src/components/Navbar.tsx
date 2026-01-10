@@ -6,42 +6,94 @@ import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, BarChart3, BookOpen, MessageSquare } from 'lucide-react'
 
-const navigation = [
-  { name: 'Beranda', href: '/', icon: Home },
-  {
-    name: 'Profil Desa',
-    icon: Users,
-    children: [
-      { name: 'Visi & Misi', href: '/profil/visi-misi' },
-      { name: 'Struktur Organisasi', href: '/profil/struktur' },
-    ],
-  },
-  {
-    name: 'Data & Informasi',
-    icon: BarChart3,
-    children: [
-      { name: 'Demografi', href: '/data/demografi' },
-      { name: 'Kotak Saran', href: '/informasi/saran' },
-    ],
-  },
-  {
-    name: 'Kegiatan',
-    icon: Calendar,
-    children: [
-      { name: 'Bank Sampah', href: '/kegiatan/bank-sampah' },
-      { name: 'Pengajian', href: '/kegiatan/pengajian' },
-      { name: 'Karang Taruna', href: '/kegiatan/karang-taruna' },
-      { name: 'Semua Kegiatan', href: '/kegiatan' },
-    ],
-  },
-  { name: 'Portal Edukasi', href: '/edukasi', icon: BookOpen },
-  { name: 'Forum', href: '/forum', icon: MessageSquare },
-  { name: 'Pengumuman', href: '/pengumuman', icon: Bell },
-  { name: 'Galeri', href: '/galeri', icon: ImageIcon },
-  { name: 'Kontak', href: '/kontak', icon: Phone },
-]
+interface SiteSettings {
+  siteName?: string
+  showForum?: boolean
+  showDemographics?: boolean
+  showSuggestionBox?: boolean
+  showGallery?: boolean
+  showKegiatan?: boolean
+  showPengumuman?: boolean
+  showKarangTaruna?: boolean
+  showEdukasi?: boolean
+}
 
-export default function Navbar() {
+interface NavbarClientProps {
+  settings: SiteSettings | null
+}
+
+export default function Navbar({ settings }: NavbarClientProps) {
+  const siteName = settings?.siteName || 'Dusun Dlingo'
+
+  // Build dynamic navigation based on settings
+  const buildNavigation = () => {
+    const nav: any[] = [
+      { name: 'Beranda', href: '/', icon: Home },
+      {
+        name: 'Profil Desa',
+        icon: Users,
+        children: [
+          { name: 'Visi & Misi', href: '/profil/visi-misi' },
+          { name: 'Struktur Organisasi', href: '/profil/struktur' },
+        ],
+      },
+    ]
+
+    // Data & Informasi - conditional children
+    const dataInfoChildren: any[] = []
+    if (settings?.showDemographics !== false) {
+      dataInfoChildren.push({ name: 'Demografi', href: '/data/demografi' })
+    }
+    if (settings?.showSuggestionBox !== false) {
+      dataInfoChildren.push({ name: 'Kotak Saran', href: '/informasi/saran' })
+    }
+    if (dataInfoChildren.length > 0) {
+      nav.push({
+        name: 'Data & Informasi',
+        icon: BarChart3,
+        children: dataInfoChildren,
+      })
+    }
+
+    // Kegiatan - conditional display and children
+    if (settings?.showKegiatan !== false) {
+      const kegiatanChildren: any[] = [
+        { name: 'Bank Sampah', href: '/kegiatan/bank-sampah' },
+        { name: 'Pengajian', href: '/kegiatan/pengajian' },
+      ]
+
+      if (settings?.showKarangTaruna !== false) {
+        kegiatanChildren.push({ name: 'Karang Taruna', href: '/kegiatan/karang-taruna' })
+      }
+
+      kegiatanChildren.push({ name: 'Semua Kegiatan', href: '/kegiatan' })
+
+      nav.push({
+        name: 'Kegiatan',
+        icon: Calendar,
+        children: kegiatanChildren,
+      })
+    }
+
+    if (settings?.showEdukasi !== false) {
+      nav.push({ name: 'Portal Edukasi', href: '/edukasi', icon: BookOpen })
+    }
+    if (settings?.showForum !== false) {
+      nav.push({ name: 'Forum', href: '/forum', icon: MessageSquare })
+    }
+    if (settings?.showPengumuman !== false) {
+      nav.push({ name: 'Pengumuman', href: '/pengumuman', icon: Bell })
+    }
+    if (settings?.showGallery !== false) {
+      nav.push({ name: 'Galeri', href: '/galeri', icon: ImageIcon })
+    }
+
+    nav.push({ name: 'Kontak', href: '/kontak', icon: Phone })
+
+    return nav
+  }
+
+  const navigation = buildNavigation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const pathname = usePathname()
@@ -64,7 +116,7 @@ export default function Navbar() {
                 height={40}
                 className="w-10 h-10"
               />
-              <span className="text-xl font-bold text-gray-900">Dusun Dlingo</span>
+              <span className="text-xl font-bold text-gray-900">{siteName}</span>
             </Link>
           </div>
 
