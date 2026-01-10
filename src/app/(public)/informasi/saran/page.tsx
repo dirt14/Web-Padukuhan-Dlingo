@@ -75,10 +75,6 @@ export default function SaranPage() {
               <span className="text-blue-600 mr-2">•</span>
               <span>Sertakan kontak yang aktif agar kami dapat merespon</span>
             </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 mr-2">•</span>
-              <span>Saran akan ditinjau dalam 3-5 hari kerja</span>
-            </li>
           </ul>
         </div>
       </div>

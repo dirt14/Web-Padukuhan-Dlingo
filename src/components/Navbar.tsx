@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
-import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, UserCircle, BarChart3, BookOpen, FileText, MessageSquare, HelpCircle } from 'lucide-react'
+import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, BarChart3, BookOpen, MessageSquare } from 'lucide-react'
 
 const navigation = [
   { name: 'Beranda', href: '/', icon: Home },
@@ -21,9 +21,7 @@ const navigation = [
     icon: BarChart3,
     children: [
       { name: 'Demografi', href: '/data/demografi' },
-      { name: 'FAQ', href: '/informasi/faq' },
       { name: 'Kotak Saran', href: '/informasi/saran' },
-      { name: 'Dokumen', href: '/informasi/dokumen' },
     ],
   },
   {

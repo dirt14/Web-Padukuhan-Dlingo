@@ -47,8 +47,8 @@ async function main() {
 4. Menjaga kelestarian lingkungan hidup
 5. Meningkatkan partisipasi masyarakat dalam pembangunan dusun
 6. Membangun infrastruktur yang mendukung kesejahteraan warga`,
-      history: 'Dusun Dlingo adalah sebuah dusun yang terletak di Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.',
-      address: 'Dusun Dlingo, Desa Dlingo, Kecamatan Dlingo, Kabupaten Bantul, Daerah Istimewa Yogyakarta',
+      history: 'Dusun Dlingo adalah sebuah dusun yang terletak di Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.',
+      address: 'Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, DIY 55671',
       mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31611.891835066867!2d110.41!3d-7.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sDlingo!5e0!3m2!1sen!2sid!4v1234567890',
       phone: '+62 812 3456 7890',
       email: 'dusundlingo@gmail.com'

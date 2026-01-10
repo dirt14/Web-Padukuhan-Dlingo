@@ -144,6 +144,33 @@ model SiteSettings {
   heroTitle   String?
   heroSubtitle String?
   footerText  String?
+
+  // Feature toggles - Show/hide menu items
+  showForum          Boolean @default(true)
+  showDemographics   Boolean @default(true)
+  showSuggestionBox  Boolean @default(true)
+  showGallery        Boolean @default(true)
+  showKegiatan       Boolean @default(true)
+  showPengumuman     Boolean @default(true)
+  showKarangTaruna   Boolean @default(true)
+  showEdukasi        Boolean @default(true)
+
+  // Static content editing
+  aboutDusun         String?  // "Tentang Dusun Dlingo" section on homepage
+  footerAbout        String?  // Footer about text
+  footerQuickLinks   String?  // JSON array of footer links
+
+  // Contact info
+  phone              String?
+  email              String?
+  address            String?
+
+  // Social media
+  facebook           String?
+  instagram          String?
+  twitter            String?
+  youtube            String?
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

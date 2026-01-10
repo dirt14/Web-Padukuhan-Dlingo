@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   },
   description: 'Website resmi Dusun Dlingo. Portal informasi untuk warga tentang pengumuman, kegiatan, dan layanan dusun.',
   keywords: ['Dusun Dlingo', 'Desa', 'Pengumuman', 'Kegiatan', 'Karang Taruna'],
+  icons: {
+    icon: '/images/logo_dusun.svg',
+    shortcut: '/images/logo_dusun.svg',
+    apple: '/images/logo_dusun.svg',
+  },
 }
 
 export default function RootLayout({

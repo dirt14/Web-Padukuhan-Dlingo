@@ -3,7 +3,13 @@
     "allow": [
       "Bash(npx prisma migrate dev:*)",
       "Bash(npx prisma:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout 5 cat:*)",
+      "Bash(ls -la \"d:\\\\Website\\\\PadukuhanDlingo\\\\Web-Padukuhan-Dlingo\\\\src\\\\app\\\\\\(public\\)\"\" 2>/dev/null || echo \"Path format issue \")",
+      "Bash(cat:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

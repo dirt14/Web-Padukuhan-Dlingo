@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 async function getDemographics() {
   try {
     const demographics = await prisma.demographics.findFirst({
-      orderBy: { year: 'desc' }
+      orderBy: { updatedAt: 'desc' }
     })
     return demographics
   } catch {
@@ -201,7 +201,11 @@ export default async function DemografiPage() {
         <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <p className="text-sm text-blue-800">
             <strong>Catatan:</strong> Data statistik ini diperbarui secara berkala.
-            Terakhir diperbarui: {new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}
+            {demographics && demographics.updatedAt ? (
+              <> Terakhir diperbarui: {new Date(demographics.updatedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</>
+            ) : (
+              <> Data terakhir diperbarui: 1 Januari {currentYear}</>
+            )}
           </p>
         </div>
       </div>

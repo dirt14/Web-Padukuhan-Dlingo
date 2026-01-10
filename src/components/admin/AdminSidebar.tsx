@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import NextImage from 'next/image'
 import {
   LayoutDashboard,
   Bell,
@@ -15,7 +16,9 @@ import {
   Menu,
   X,
   Home,
-  UserCircle
+  UserCircle,
+  BarChart3,
+  MessageSquare
 } from 'lucide-react'
 
 interface AdminSidebarProps {
@@ -30,22 +33,21 @@ const navigation = [
   { name: 'Pengumuman', href: '/admin/pengumuman', icon: Bell },
   { name: 'Kegiatan', href: '/admin/kegiatan', icon: Calendar },
   { name: 'Galeri', href: '/admin/galeri', icon: Image },
-  { name: 'Profil Desa', href: '/admin/profil', icon: FileText, adminOnly: true },
+  { name: 'Data Demografi', href: '/admin/demografi', icon: BarChart3 },
+  { name: 'Kotak Saran', href: '/admin/saran', icon: MessageSquare },
+  { name: 'Profil Desa', href: '/admin/profil', icon: FileText },
   { name: 'Struktur Organisasi', href: '/admin/struktur', icon: Users },
   { name: 'Karang Taruna', href: '/admin/karang-taruna', icon: UserCircle },
-  { name: 'Notifikasi', href: '/admin/notifikasi', icon: Bell, adminOnly: true },
-  { name: 'Pengaturan', href: '/admin/pengaturan', icon: Settings, adminOnly: true },
+  { name: 'Notifikasi', href: '/admin/notifikasi', icon: Bell },
+  { name: 'Pengaturan', href: '/admin/pengaturan', icon: Settings },
 ]
 
 export default function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const isAdmin = user.role === 'ADMIN'
-
-  const filteredNavigation = navigation.filter(
-    (item) => !item.adminOnly || isAdmin
-  )
+  // All users have access to all features - no filtering needed
+  const filteredNavigation = navigation
 
   const isActive = (href: string) => {
     if (href === '/admin') return pathname === '/admin'
@@ -58,9 +60,13 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/admin" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">D</span>
-            </div>
+            <NextImage
+              src="/images/logo_dusun.svg"
+              alt="Logo Dusun Dlingo"
+              width={32}
+              height={32}
+              className="w-8 h-8"
+            />
             <span className="font-bold text-gray-900">Admin</span>
           </Link>
           <button
@@ -113,9 +119,13 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
         <div className="flex flex-col flex-grow bg-white border-r border-gray-200">
           <div className="flex items-center flex-shrink-0 px-4 h-16 border-b border-gray-200">
             <Link href="/admin" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
-              </div>
+              <NextImage
+                src="/images/logo_dusun.svg"
+                alt="Logo Dusun Dlingo"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
               <div>
                 <span className="font-bold text-gray-900 block">Dusun Dlingo</span>
                 <span className="text-xs text-gray-500">Admin Panel</span>

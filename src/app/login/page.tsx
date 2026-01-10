@@ -5,6 +5,7 @@ import { signIn } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Eye, EyeOff, Lock, Mail, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function LoginForm() {
   const router = useRouter()
@@ -112,22 +113,6 @@ function LoginForm() {
           {loading ? 'Memproses...' : 'Masuk'}
         </button>
       </form>
-
-      <div className="mt-6">
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Info Login</span>
-          </div>
-        </div>
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg text-sm text-gray-600">
-          <p><strong>Pak Dukuh:</strong> admin@dusundlingo.com</p>
-          <p><strong>Karang Taruna:</strong> kt@dusundlingo.com</p>
-          <p className="mt-2 text-xs text-gray-500">Password default: password123</p>
-        </div>
-      </div>
     </div>
   )
 }
@@ -137,9 +122,13 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link href="/" className="flex justify-center">
-          <div className="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-2xl">D</span>
-          </div>
+          <Image
+            src="/images/logo_dusun.svg"
+            alt="Logo Dusun Dlingo"
+            width={80}
+            height={80}
+            className="w-20 h-20"
+          />
         </Link>
         <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
           Login Admin

@@ -124,12 +124,12 @@ export default async function ForumPage() {
         </div>
 
         {/* Categories */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {displayCategories.map((category) => (
             <Link
               key={category.id}
               href={`/forum/${category.slug}`}
-              className="card p-6 hover:shadow-lg transition-shadow group"
+              className="card p-6 hover:shadow-lg transition-shadow group block"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="text-4xl">{category.icon || '📁'}</div>
