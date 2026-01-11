@@ -3,6 +3,9 @@ import { getServerSession } from 'next-auth'
 import prisma from '@/lib/db'
 import { authOptions } from '@/lib/auth'
 
+// Force dynamic rendering for this route
+export const dynamic = 'force-dynamic'
+
 // PUT - Update suggestion status
 export async function PUT(
   request: Request,

@@ -14,7 +14,8 @@
       "Bash(npx tsx:*)",
       "Bash(npm run build:*)",
       "Bash(ls:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(find:*)"
     ]
   }
 }
