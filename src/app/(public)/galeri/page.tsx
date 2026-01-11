@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react'
 import { Image as ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react'
 
+// Force dynamic rendering to avoid build-time data collection errors
+export const dynamic = 'force-dynamic'
+
 interface Photo {
   id: string
   url: string
