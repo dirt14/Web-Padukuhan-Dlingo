@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { MessageSquare, Plus, Eye, MessageCircle, Pin } from 'lucide-react'
+import { MessageSquare, Plus, Eye, MessageCircle, Pin, User, Calendar } from 'lucide-react'
 import prisma from '@/lib/db'
 
 export const metadata: Metadata = {
@@ -149,38 +149,56 @@ export default async function ForumPage() {
 
         {/* Recent Topics */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Topik Terbaru</h2>
-          <div className="space-y-4">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Topik Terbaru</h2>
+            <div className="flex items-center text-sm text-gray-500">
+              <MessageSquare className="h-4 w-4 mr-2" />
+              {displayTopics.length} diskusi aktif
+            </div>
+          </div>
+          <div className="space-y-3">
             {displayTopics.map((topic) => (
               <Link
                 key={topic.id}
                 href={`/forum/topik/${topic.slug}`}
-                className="card p-6 hover:shadow-md transition-shadow group"
+                className="card p-5 hover:shadow-lg hover:border-primary-200 transition-all duration-200 group border-2 border-transparent"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md">
+                      <MessageSquare className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
                       {topic.isPinned && (
-                        <Pin className="h-4 w-4 text-primary-600" />
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full">
+                          <Pin className="h-3 w-3" />
+                          Disematkan
+                        </span>
                       )}
-                      <span className="text-xs font-medium px-2 py-1 bg-blue-100 text-blue-700 rounded">
+                      <span className="text-xs font-medium px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full">
                         {topic.category.name}
                       </span>
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                    <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-1">
                       {topic.title}
                     </h3>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
-                      <span>oleh {topic.authorName}</span>
-                      <span className="flex items-center">
-                        <Eye className="h-4 w-4 mr-1" />
-                        {topic.views}
+                    <div className="flex items-center gap-4 text-sm text-gray-500 flex-wrap">
+                      <span className="flex items-center font-medium text-gray-700">
+                        <User className="h-4 w-4 mr-1.5" />
+                        {topic.authorName}
                       </span>
                       <span className="flex items-center">
-                        <MessageCircle className="h-4 w-4 mr-1" />
+                        <Eye className="h-4 w-4 mr-1.5" />
+                        {topic.views} views
+                      </span>
+                      <span className="flex items-center font-medium text-primary-600">
+                        <MessageCircle className="h-4 w-4 mr-1.5" />
                         {topic._count.replies} balasan
                       </span>
-                      <span>
+                      <span className="flex items-center text-gray-400">
+                        <Calendar className="h-4 w-4 mr-1.5" />
                         {new Date(topic.createdAt).toLocaleDateString('id-ID', {
                           day: 'numeric',
                           month: 'short',

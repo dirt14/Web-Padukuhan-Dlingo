@@ -9,26 +9,30 @@ export const metadata: Metadata = {
 
 async function getData() {
   try {
-    const [profile, ktMembers] = await Promise.all([
+    const [profile, ktMembers, settings] = await Promise.all([
       prisma.villageProfile.findFirst(),
       prisma.organizationMember.findMany({
         where: { type: 'KARANG_TARUNA' },
         orderBy: { order: 'asc' },
         take: 3
-      })
+      }),
+      prisma.siteSettings.findFirst()
     ])
-    return { profile, ktMembers }
+    return { profile, ktMembers, settings }
   } catch {
-    return { profile: null, ktMembers: [] }
+    return { profile: null, ktMembers: [], settings: null }
   }
 }
 
 export default async function KontakPage() {
-  const { profile, ktMembers } = await getData()
+  const { profile, settings } = await getData()
 
-  const defaultAddress = 'Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta 55671'
+  const defaultAddress = 'Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo'
   const defaultPhone = '+62 812 3456 7890'
   const defaultEmail = 'dusundlingo@gmail.com'
+  const defaultDukuhName = 'Kepala Dusun Dlingo'
+  const defaultKarangTarunaName = 'Ketua Karang Taruna Dlingo'
+  const defaultKarangTarunaPhone = '+62 813 9876 5432'
 
   return (
     <div className="py-12">
@@ -53,7 +57,7 @@ export default async function KontakPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Kepala Dusun</p>
-                    <p className="font-medium text-gray-900">Bapak Dukuh Dlingo</p>
+                    <p className="font-medium text-gray-900">{(settings as any)?.dukuhName || defaultDukuhName}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -62,22 +66,24 @@ export default async function KontakPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Telepon / WhatsApp</p>
-                    <a href={`tel:${profile?.phone || defaultPhone}`} className="font-medium text-gray-900 hover:text-primary-600">
-                      {profile?.phone || defaultPhone}
+                    <a href={`tel:${(settings as any)?.dukuhPhone || defaultPhone}`} className="font-medium text-gray-900 hover:text-primary-600">
+                      {(settings as any)?.dukuhPhone || defaultPhone}
                     </a>
                   </div>
                 </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-6 w-6 text-blue-600" />
+                {(settings as any)?.dukuhEmail && (
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Mail className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Email</p>
+                      <a href={`mailto:${(settings as any).dukuhEmail}`} className="font-medium text-gray-900 hover:text-primary-600">
+                        {(settings as any).dukuhEmail}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Email</p>
-                    <a href={`mailto:${profile?.email || defaultEmail}`} className="font-medium text-gray-900 hover:text-primary-600">
-                      {profile?.email || defaultEmail}
-                    </a>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
 
@@ -91,7 +97,7 @@ export default async function KontakPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Ketua Karang Taruna</p>
-                    <p className="font-medium text-gray-900">Ketua Karang Taruna Dlingo</p>
+                    <p className="font-medium text-gray-900">{(settings as any)?.karangTarunaName || defaultKarangTarunaName}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -100,7 +106,9 @@ export default async function KontakPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">WhatsApp</p>
-                    <p className="font-medium text-gray-900">+62 813 9876 5432</p>
+                    <a href={`https://wa.me/${((settings as any)?.karangTarunaPhone || defaultKarangTarunaPhone).replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="font-medium text-gray-900 hover:text-primary-600">
+                      {(settings as any)?.karangTarunaPhone || defaultKarangTarunaPhone}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -116,7 +124,7 @@ export default async function KontakPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Alamat Sekretariat</p>
-                    <p className="font-medium text-gray-900">{profile?.address || defaultAddress}</p>
+                    <p className="font-medium text-gray-900">{settings?.address || profile?.address || defaultAddress}</p>
                   </div>
                 </div>
               </div>
@@ -129,7 +137,7 @@ export default async function KontakPage() {
                 Untuk respon yang lebih cepat, silakan hubungi kami melalui WhatsApp
               </p>
               <a
-                href={`https://wa.me/${(profile?.phone || defaultPhone).replace(/\D/g, '')}`}
+                href={`https://wa.me/${((settings as any)?.dukuhPhone || defaultPhone).replace(/\D/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary w-full justify-center bg-green-600 hover:bg-green-700"

@@ -1,0 +1,12 @@
+# robots.txt for Dusun Dlingo Website
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl-delay for search engines
+Crawl-delay: 1

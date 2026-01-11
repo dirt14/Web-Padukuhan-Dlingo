@@ -151,7 +151,7 @@ export default async function DemografiPage() {
               <h3 className="text-lg font-bold text-gray-900">Distribusi Usia</h3>
             </div>
             <div className="space-y-3">
-              {data.ageData.map((item, index) => (
+              {data.ageData.map((item: { ageGroup: string; count: number }, index: number) => (
                 <div key={index} className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">{item.ageGroup}</span>
                   <span className="font-medium text-gray-900">{item.count} jiwa</span>
@@ -169,7 +169,7 @@ export default async function DemografiPage() {
               <h3 className="text-lg font-bold text-gray-900">Tingkat Pendidikan</h3>
             </div>
             <div className="space-y-3">
-              {data.educationData.map((item, index) => (
+              {data.educationData.map((item: { level: string; count: number }, index: number) => (
                 <div key={index} className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">{item.level}</span>
                   <span className="font-medium text-gray-900">{item.count} jiwa</span>
@@ -187,7 +187,7 @@ export default async function DemografiPage() {
               <h3 className="text-lg font-bold text-gray-900">Jenis Pekerjaan</h3>
             </div>
             <div className="space-y-3">
-              {data.occupationData.map((item, index) => (
+              {data.occupationData.map((item: { type: string; count: number }, index: number) => (
                 <div key={index} className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">{item.type}</span>
                   <span className="font-medium text-gray-900">{item.count} jiwa</span>

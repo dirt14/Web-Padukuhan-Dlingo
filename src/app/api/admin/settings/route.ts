@@ -28,6 +28,8 @@ export async function POST(request: NextRequest) {
       tagline: data.tagline,
       logo: data.logo,
       heroImage: data.heroImage,
+      heroImage2: data.heroImage2,
+      heroImage3: data.heroImage3,
       heroTitle: data.heroTitle,
       heroSubtitle: data.heroSubtitle,
       footerText: data.footerText,
@@ -50,6 +52,15 @@ export async function POST(request: NextRequest) {
       phone: data.phone,
       email: data.email,
       address: data.address,
+
+      // Pak Dukuh contact
+      dukuhName: data.dukuhName,
+      dukuhPhone: data.dukuhPhone,
+      dukuhEmail: data.dukuhEmail,
+
+      // Karang Taruna contact
+      karangTarunaName: data.karangTarunaName,
+      karangTarunaPhone: data.karangTarunaPhone,
 
       // Social media
       facebook: data.facebook,

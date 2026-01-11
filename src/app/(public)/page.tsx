@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { ArrowRight, Calendar, Bell, Users, Recycle, BookOpen } from 'lucide-react'
 import prisma from '@/lib/db'
 import { formatDate, truncate, getCategoryLabel } from '@/lib/utils'
+import HeroCarousel from '@/components/HeroCarousel'
 
 async function getData() {
   try {
@@ -29,24 +30,22 @@ async function getData() {
 export default async function HomePage() {
   const { announcements, activities, settings, profile } = await getData()
 
+  // Prepare hero images - support up to 3 images
+  const heroImages = []
+  if (settings?.heroImage) heroImages.push(settings.heroImage)
+  if (settings?.heroImage2) heroImages.push(settings.heroImage2)
+  if (settings?.heroImage3) heroImages.push(settings.heroImage3)
+
   return (
     <div>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary-500 to-primary-700 text-white">
-        {settings?.heroImage && (
-          <div className="absolute inset-0">
-            <img
-              src={settings.heroImage}
-              alt="Hero Background"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-900/80 to-primary-800/70"></div>
-          </div>
-        )}
-        {!settings?.heroImage && (
+        {heroImages.length > 0 ? (
+          <HeroCarousel images={heroImages} />
+        ) : (
           <div className="absolute inset-0 bg-black/20"></div>
         )}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               {settings?.heroTitle || 'Selamat Datang di Dusun Dlingo'}
@@ -71,7 +70,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/50 to-transparent"></div>
       </section>
 
       {/* Quick Stats */}
@@ -243,7 +242,7 @@ export default async function HomePage() {
             <div>
               <h2 className="section-title">Tentang Dusun Dlingo</h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                {settings?.aboutDusun || profile?.history || 'Dusun Dlingo adalah sebuah dusun yang terletak di Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.'}
+                {settings?.aboutDusun || profile?.history || 'Dusun Dlingo adalah sebuah dusun yang terletak di Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo. Dusun ini dikenal dengan semangat gotong royong dan kebersamaan warganya dalam berbagai kegiatan sosial dan keagamaan.'}
               </p>
               <div className="mt-6 space-y-4">
                 <div className="flex items-start space-x-3">

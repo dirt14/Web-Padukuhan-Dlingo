@@ -3,15 +3,15 @@ import Image from 'next/image'
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 
 interface SiteSettings {
-  siteName?: string
-  footerAbout?: string
-  phone?: string
-  email?: string
-  address?: string
-  facebook?: string
-  instagram?: string
-  twitter?: string
-  youtube?: string
+  siteName?: string | null
+  footerAbout?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  facebook?: string | null
+  instagram?: string | null
+  twitter?: string | null
+  youtube?: string | null
 }
 
 interface FooterProps {

@@ -12,6 +12,8 @@ export default function AdminPengaturanPage() {
     tagline: '',
     logo: '',
     heroImage: '',
+    heroImage2: '',
+    heroImage3: '',
     heroTitle: '',
     heroSubtitle: '',
     footerText: '',
@@ -35,6 +37,15 @@ export default function AdminPengaturanPage() {
     email: '',
     address: '',
 
+    // Pak Dukuh contact
+    dukuhName: '',
+    dukuhPhone: '',
+    dukuhEmail: '',
+
+    // Karang Taruna contact
+    karangTarunaName: '',
+    karangTarunaPhone: '',
+
     // Social media
     facebook: '',
     instagram: '',
@@ -52,6 +63,8 @@ export default function AdminPengaturanPage() {
             tagline: data.settings.tagline || '',
             logo: data.settings.logo || '',
             heroImage: data.settings.heroImage || '',
+            heroImage2: data.settings.heroImage2 || '',
+            heroImage3: data.settings.heroImage3 || '',
             heroTitle: data.settings.heroTitle || '',
             heroSubtitle: data.settings.heroSubtitle || '',
             footerText: data.settings.footerText || '',
@@ -72,6 +85,13 @@ export default function AdminPengaturanPage() {
             email: data.settings.email || '',
             address: data.settings.address || '',
 
+            dukuhName: data.settings.dukuhName || '',
+            dukuhPhone: data.settings.dukuhPhone || '',
+            dukuhEmail: data.settings.dukuhEmail || '',
+
+            karangTarunaName: data.settings.karangTarunaName || '',
+            karangTarunaPhone: data.settings.karangTarunaPhone || '',
+
             facebook: data.settings.facebook || '',
             instagram: data.settings.instagram || '',
             twitter: data.settings.twitter || '',
@@ -81,7 +101,7 @@ export default function AdminPengaturanPage() {
       })
   }, [])
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'logo' | 'heroImage') => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'logo' | 'heroImage' | 'heroImage2' | 'heroImage3') => {
     const file = e.target.files?.[0]
     if (!file) return
 
@@ -260,36 +280,107 @@ export default function AdminPengaturanPage() {
         {/* Contact Info */}
         <div className="card p-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Informasi Kontak</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
+
+          <div className="space-y-6">
+            {/* Kontak Umum */}
             <div>
-              <label className="label">Telepon</label>
-              <input
-                type="text"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="input"
-                placeholder="+62 812 3456 7890"
-              />
+              <h3 className="font-semibold text-gray-900 mb-3">Kontak Umum</h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Telepon</label>
+                  <input
+                    type="text"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="input"
+                    placeholder="+62 812 3456 7890"
+                  />
+                </div>
+                <div>
+                  <label className="label">Email</label>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="input"
+                    placeholder="dusundlingo@gmail.com"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="label">Alamat</label>
+                  <textarea
+                    value={form.address}
+                    onChange={(e) => setForm({ ...form, address: e.target.value })}
+                    rows={2}
+                    className="input"
+                    placeholder="Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo"
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="label">Email</label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="input"
-                placeholder="dusundlingo@gmail.com"
-              />
+
+            {/* Kontak Pak Dukuh */}
+            <div className="border-t pt-6">
+              <h3 className="font-semibold text-gray-900 mb-3">Kontak Pak Dukuh</h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Nama Pak Dukuh</label>
+                  <input
+                    type="text"
+                    value={form.dukuhName}
+                    onChange={(e) => setForm({ ...form, dukuhName: e.target.value })}
+                    className="input"
+                    placeholder="Bapak..."
+                  />
+                </div>
+                <div>
+                  <label className="label">Telepon / WhatsApp</label>
+                  <input
+                    type="text"
+                    value={form.dukuhPhone}
+                    onChange={(e) => setForm({ ...form, dukuhPhone: e.target.value })}
+                    className="input"
+                    placeholder="+62 812 3456 7890"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="label">Email Pak Dukuh</label>
+                  <input
+                    type="email"
+                    value={form.dukuhEmail}
+                    onChange={(e) => setForm({ ...form, dukuhEmail: e.target.value })}
+                    className="input"
+                    placeholder="pakdukuh@dusundlingo.com"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="sm:col-span-2">
-              <label className="label">Alamat</label>
-              <textarea
-                value={form.address}
-                onChange={(e) => setForm({ ...form, address: e.target.value })}
-                rows={2}
-                className="input"
-                placeholder="Dusun Dlingo, Kelurahan Banyuroto, Kecamatan Nanggulan, Kabupaten Kulon Progo, DIY 55671"
-              />
+
+            {/* Kontak Karang Taruna */}
+            <div className="border-t pt-6">
+              <h3 className="font-semibold text-gray-900 mb-3">Kontak Karang Taruna</h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Nama Ketua Karang Taruna</label>
+                  <input
+                    type="text"
+                    value={form.karangTarunaName}
+                    onChange={(e) => setForm({ ...form, karangTarunaName: e.target.value })}
+                    className="input"
+                    placeholder="Nama Ketua Karang Taruna"
+                  />
+                </div>
+                <div>
+                  <label className="label">WhatsApp Karang Taruna</label>
+                  <input
+                    type="text"
+                    value={form.karangTarunaPhone}
+                    onChange={(e) => setForm({ ...form, karangTarunaPhone: e.target.value })}
+                    className="input"
+                    placeholder="+62 813 9876 5432"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -365,26 +456,81 @@ export default function AdminPengaturanPage() {
                 placeholder="Deskripsi singkat di hero section"
               />
             </div>
-            <div>
-              <label className="label">Gambar Hero</label>
-              <div className="flex items-start space-x-4">
-                {form.heroImage ? (
-                  <div className="w-48 h-24 bg-gray-100 rounded-lg overflow-hidden">
-                    <img src={form.heroImage} alt="Hero" className="w-full h-full object-cover" />
+
+            <div className="border-t pt-4">
+              <p className="text-sm text-gray-600 mb-4">Upload hingga 3 gambar untuk carousel hero. Gambar akan berganti otomatis setiap 5 detik.</p>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="label">Gambar Hero 1</label>
+                  <div className="flex items-start space-x-4">
+                    {form.heroImage ? (
+                      <div className="w-48 h-24 bg-gray-100 rounded-lg overflow-hidden">
+                        <img src={form.heroImage} alt="Hero 1" className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-48 h-24 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <ImageIcon className="h-8 w-8 text-gray-400" />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e, 'heroImage')}
+                        className="input"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Disarankan ukuran 1920x600 atau lebih</p>
+                    </div>
                   </div>
-                ) : (
-                  <div className="w-48 h-24 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <ImageIcon className="h-8 w-8 text-gray-400" />
+                </div>
+
+                <div>
+                  <label className="label">Gambar Hero 2 (Opsional)</label>
+                  <div className="flex items-start space-x-4">
+                    {form.heroImage2 ? (
+                      <div className="w-48 h-24 bg-gray-100 rounded-lg overflow-hidden">
+                        <img src={form.heroImage2} alt="Hero 2" className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-48 h-24 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <ImageIcon className="h-8 w-8 text-gray-400" />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e, 'heroImage2')}
+                        className="input"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Gambar kedua untuk carousel</p>
+                    </div>
                   </div>
-                )}
-                <div className="flex-1">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleImageUpload(e, 'heroImage')}
-                    className="input"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Disarankan ukuran 1920x600 atau lebih</p>
+                </div>
+
+                <div>
+                  <label className="label">Gambar Hero 3 (Opsional)</label>
+                  <div className="flex items-start space-x-4">
+                    {form.heroImage3 ? (
+                      <div className="w-48 h-24 bg-gray-100 rounded-lg overflow-hidden">
+                        <img src={form.heroImage3} alt="Hero 3" className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-48 h-24 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <ImageIcon className="h-8 w-8 text-gray-400" />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e, 'heroImage3')}
+                        className="input"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Gambar ketiga untuk carousel</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

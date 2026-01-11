@@ -141,6 +141,8 @@ model SiteSettings {
   siteName    String   @default("Dusun Dlingo")
   tagline     String?
   heroImage   String?
+  heroImage2  String?
+  heroImage3  String?
   heroTitle   String?
   heroSubtitle String?
   footerText  String?
@@ -164,6 +166,15 @@ model SiteSettings {
   phone              String?
   email              String?
   address            String?
+
+  // Pak Dukuh contact
+  dukuhName          String?
+  dukuhPhone         String?
+  dukuhEmail         String?
+
+  // Karang Taruna contact
+  karangTarunaName   String?
+  karangTarunaPhone  String?
 
   // Social media
   facebook           String?
