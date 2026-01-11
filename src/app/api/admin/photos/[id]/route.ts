@@ -3,6 +3,66 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/db'
 
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+    const photo = await prisma.photo.findUnique({
+      where: { id },
+      include: {
+        album: { select: { title: true } },
+        activity: { select: { title: true } }
+      }
+    })
+
+    if (!photo) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+
+    return NextResponse.json({ photo })
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch photo' }, { status: 500 })
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { id } = await params
+    const data = await request.json()
+
+    const existing = await prisma.photo.findUnique({ where: { id } })
+    if (!existing) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+
+    const photo = await prisma.photo.update({
+      where: { id },
+      data: {
+        url: data.url,
+        caption: data.caption || null,
+        category: data.category || null,
+        albumId: data.albumId || null,
+        activityId: data.activityId || null
+      }
+    })
+
+    return NextResponse.json({ photo })
+  } catch (error) {
+    console.error('Update photo error:', error)
+    return NextResponse.json({ error: 'Failed to update photo' }, { status: 500 })
+  }
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
