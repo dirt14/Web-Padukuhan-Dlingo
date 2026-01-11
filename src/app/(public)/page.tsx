@@ -33,7 +33,19 @@ export default async function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary-500 to-primary-700 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
+        {settings?.heroImage && (
+          <div className="absolute inset-0">
+            <img
+              src={settings.heroImage}
+              alt="Hero Background"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-900/80 to-primary-800/70"></div>
+          </div>
+        )}
+        {!settings?.heroImage && (
+          <div className="absolute inset-0 bg-black/20"></div>
+        )}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
