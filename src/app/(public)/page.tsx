@@ -45,7 +45,7 @@ export default async function HomePage() {
         ) : (
           <div className="absolute inset-0 bg-black/20"></div>
         )}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 z-10">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40 lg:py-48 z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               {settings?.heroTitle || 'Selamat Datang di Dusun Dlingo'}
