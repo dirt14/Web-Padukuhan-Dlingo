@@ -38,9 +38,9 @@ export function getCategoryLabel(category: string): string {
     KESEHATAN: 'Kesehatan',
     KEGIATAN_DUSUN: 'Kegiatan Dusun',
     UMUM: 'Umum',
-    BANK_SAMPAH: 'Bank Sampah',
-    PENGAJIAN: 'Pengajian',
-    KARANG_TARUNA: 'Karang Taruna',
+    SOSIAL: 'Sosial',
+    KEAGAMAAN: 'Keagamaan',
+    BUDAYA: 'Budaya',
     LAINNYA: 'Lainnya'
   }
   return labels[category] || category

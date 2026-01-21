@@ -116,16 +116,32 @@ export default async function KontakPage() {
 
             {/* Address */}
             <div className="card p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Alamat</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-6">Alamat Sekretariat</h2>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <MapPin className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Alamat Sekretariat</p>
-                    <p className="font-medium text-gray-900">{settings?.address || profile?.address || defaultAddress}</p>
+                    <p className="text-sm text-gray-500">Alamat Lengkap</p>
+                    <p className="font-medium text-gray-900">{(settings as any)?.secretariatAddress || settings?.address || profile?.address || defaultAddress}</p>
                   </div>
+                </div>
+              </div>
+
+              {/* Google Maps */}
+              <div className="mt-6">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
+                  <iframe
+                    src={(settings as any)?.secretariatMapUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1437.8955317964517!2d110.182336993564!3d-7.80836141452914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7afb9cbebc1f7f%3A0xa2b5b746ddb47461!2sWHD!5e0!3m2!1sid!2sid!4v1768383381622!5m2!1sid!2sid"}
+                    width="100%"
+                    height="300"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full"
+                  />
                 </div>
               </div>
             </div>

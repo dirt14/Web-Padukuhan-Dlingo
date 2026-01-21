@@ -18,7 +18,8 @@ import {
   Home,
   UserCircle,
   BarChart3,
-  MessageSquare
+  MessageSquare,
+  BookOpen
 } from 'lucide-react'
 
 interface AdminSidebarProps {
@@ -28,16 +29,17 @@ interface AdminSidebarProps {
   }
 }
 
+// Urutan sesuai prioritas: Dashboard > Profil > Pengumuman > Kegiatan > Karang Taruna > Demografi > Edukasi > Galeri > Kotak Saran > Pengaturan
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { name: 'Pengumuman', href: '/admin/pengumuman', icon: Bell },
-  { name: 'Kegiatan', href: '/admin/kegiatan', icon: Calendar },
-  { name: 'Notifikasi', href: '/admin/notifikasi', icon: Bell },
-  { name: 'Galeri', href: '/admin/galeri', icon: Image },
   { name: 'Profil Dusun', href: '/admin/profil', icon: FileText },
   { name: 'Struktur Organisasi', href: '/admin/struktur', icon: Users },
+  { name: 'Pengumuman', href: '/admin/pengumuman', icon: Bell },
+  { name: 'Kegiatan', href: '/admin/kegiatan', icon: Calendar },
   { name: 'Karang Taruna', href: '/admin/karang-taruna', icon: UserCircle },
   { name: 'Data Demografi', href: '/admin/demografi', icon: BarChart3 },
+  { name: 'Edukasi', href: '/admin/edukasi', icon: BookOpen },
+  { name: 'Galeri', href: '/admin/galeri', icon: Image },
   { name: 'Kotak Saran', href: '/admin/saran', icon: MessageSquare },
   { name: 'Pengaturan', href: '/admin/pengaturan', icon: Settings },
 ]

@@ -29,28 +29,24 @@ export async function POST(request: NextRequest) {
     // Update or create notifications
     const results = []
     for (const notif of notifications) {
+      const data = {
+        title: notif.title,
+        message: notif.message,
+        link: notif.link || null,
+        type: notif.type,
+        active: notif.active,
+        startDate: notif.startDate ? new Date(notif.startDate) : null,
+        endDate: notif.endDate ? new Date(notif.endDate) : null
+      }
+
       if (notif.id) {
         const updated = await prisma.notification.update({
           where: { id: notif.id },
-          data: {
-            title: notif.title,
-            message: notif.message,
-            link: notif.link || null,
-            type: notif.type,
-            active: notif.active
-          }
+          data
         })
         results.push(updated)
       } else {
-        const created = await prisma.notification.create({
-          data: {
-            title: notif.title,
-            message: notif.message,
-            link: notif.link || null,
-            type: notif.type,
-            active: notif.active
-          }
-        })
+        const created = await prisma.notification.create({ data })
         results.push(created)
       }
     }

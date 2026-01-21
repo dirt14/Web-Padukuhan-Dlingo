@@ -6,10 +6,11 @@ import { Trash2 } from 'lucide-react'
 
 interface DeleteButtonProps {
   id: string
-  type: 'announcement' | 'activity' | 'photo' | 'album' | 'notification' | 'member'
+  type: 'announcement' | 'activity' | 'photo' | 'album' | 'notification' | 'member' | 'article'
+  onDeleted?: () => void
 }
 
-export default function DeleteButton({ id, type }: DeleteButtonProps) {
+export default function DeleteButton({ id, type, onDeleted }: DeleteButtonProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
@@ -23,7 +24,11 @@ export default function DeleteButton({ id, type }: DeleteButtonProps) {
       })
 
       if (res.ok) {
-        router.refresh()
+        if (onDeleted) {
+          onDeleted()
+        } else {
+          router.refresh()
+        }
       } else {
         alert('Gagal menghapus item')
       }

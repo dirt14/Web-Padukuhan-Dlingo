@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Users, GraduationCap, Briefcase, TrendingUp } from 'lucide-react'
+import { Users, GraduationCap, Briefcase, TrendingUp, Home } from 'lucide-react'
 import prisma from '@/lib/db'
 import DemographicsCharts from '@/components/DemographicsCharts'
 
@@ -31,7 +31,8 @@ export default async function DemografiPage() {
     femaleCount: demographics.femaleCount,
     ageData: JSON.parse(demographics.ageData),
     educationData: JSON.parse(demographics.educationData),
-    occupationData: JSON.parse(demographics.occupationData)
+    occupationData: JSON.parse(demographics.occupationData),
+    rtData: demographics.rtData ? JSON.parse(demographics.rtData) : null
   } : {
     year: currentYear,
     totalPopulation: 1250,
@@ -64,7 +65,8 @@ export default async function DemografiPage() {
       { type: 'Pelajar/Mahasiswa', count: 180 },
       { type: 'Ibu Rumah Tangga', count: 200 },
       { type: 'Lainnya', count: 120 }
-    ]
+    ],
+    rtData: null
   }
 
   return (
@@ -196,6 +198,68 @@ export default async function DemografiPage() {
             </div>
           </div>
         </div>
+
+        {/* RT Distribution */}
+        {data.rtData && data.rtData.length > 0 && (
+          <div className="mt-12">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-900">Data Per RT</h2>
+              <p className="text-gray-600 mt-2">Distribusi penduduk berdasarkan wilayah RT</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {data.rtData.map((item: { rt: string; households: number; population: number }, index: number) => (
+                <div key={index} className="card p-5 hover:shadow-lg transition-shadow">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
+                      <Home className="h-5 w-5 text-primary-600" />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900">{item.rt}</h3>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Jumlah KK</span>
+                      <span className="font-semibold text-gray-900">{item.households} KK</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Jumlah Jiwa</span>
+                      <span className="font-semibold text-primary-600">{item.population} jiwa</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Total Summary */}
+            <div className="mt-6 card p-6 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Home className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-primary-100 text-sm">Total Seluruh RT</p>
+                    <p className="text-xl font-bold">RT 22 - RT 29</p>
+                  </div>
+                </div>
+                <div className="flex gap-8">
+                  <div className="text-center">
+                    <p className="text-3xl font-bold">
+                      {data.rtData.reduce((sum: number, item: { households: number }) => sum + item.households, 0)}
+                    </p>
+                    <p className="text-primary-100 text-sm">Total KK</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl font-bold">
+                      {data.rtData.reduce((sum: number, item: { population: number }) => sum + item.population, 0)}
+                    </p>
+                    <p className="text-primary-100 text-sm">Total Jiwa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Info */}
         <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">

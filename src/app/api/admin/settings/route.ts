@@ -65,6 +65,10 @@ export async function POST(request: NextRequest) {
       karangTarunaName: data.karangTarunaName,
       karangTarunaPhone: data.karangTarunaPhone,
 
+      // Secretariat
+      secretariatAddress: data.secretariatAddress,
+      secretariatMapUrl: data.secretariatMapUrl,
+
       // Social media
       facebook: data.facebook,
       instagram: data.instagram,
@@ -72,20 +76,24 @@ export async function POST(request: NextRequest) {
       youtube: data.youtube
     }
 
+    let settings
     if (existing) {
-      const settings = await prisma.siteSettings.update({
+      settings = await prisma.siteSettings.update({
         where: { id: existing.id },
         data: settingsData
       })
-      return NextResponse.json({ settings })
     } else {
-      const settings = await prisma.siteSettings.create({
+      settings = await prisma.siteSettings.create({
         data: settingsData
       })
-      return NextResponse.json({ settings })
     }
+
+    return NextResponse.json({ settings, success: true })
   } catch (error) {
     console.error('Settings update error:', error)
-    return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 })
+    return NextResponse.json({
+      error: 'Failed to update settings',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }

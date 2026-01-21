@@ -32,6 +32,9 @@ model Announcement {
   showAsNotification Boolean @default(false)
   notificationStart DateTime?
   notificationEnd   DateTime?
+  // Kurun waktu aktif pengumuman
+  activeStart DateTime?  // Tanggal mulai tampil
+  activeEnd   DateTime?  // Tanggal berakhir tampil
   status      String   @default("DRAFT") // DRAFT, PUBLISHED
   publishedAt DateTime?
   createdAt   DateTime @default(now())
@@ -176,6 +179,10 @@ model SiteSettings {
   karangTarunaName   String?
   karangTarunaPhone  String?
 
+  // Secretariat address
+  secretariatAddress String?
+  secretariatMapUrl  String?
+
   // Social media
   facebook           String?
   instagram          String?
@@ -196,6 +203,7 @@ model Demographics {
   ageData         String   // JSON: [{ageGroup: "0-5", count: 100}, ...]
   educationData   String   // JSON: [{level: "SD", count: 200}, ...]
   occupationData  String   // JSON: [{type: "Petani", count: 150}, ...]
+  rtData          String?  // JSON: [{rt: "RT 22", households: 50, population: 150}, ...]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
@@ -284,6 +292,23 @@ model Article {
   views       Int      @default(0)
   status      String   @default("DRAFT") // DRAFT, PUBLISHED
   publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  comments    ArticleComment[]
+}
+
+// Komentar Artikel
+model ArticleComment {
+  id          String   @id @default(cuid())
+  content     String
+  authorName  String
+  authorEmail String?
+  articleId   String
+  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  parentId    String?
+  parent      ArticleComment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     ArticleComment[] @relation("CommentReplies")
+  status      String   @default("APPROVED") // PENDING, APPROVED, REJECTED
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

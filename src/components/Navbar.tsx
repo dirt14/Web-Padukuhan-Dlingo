@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
-import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, BarChart3, BookOpen, MessageSquare } from 'lucide-react'
+import { Menu, X, ChevronDown, Home, Users, Calendar, Bell, Image as ImageIcon, Phone, BarChart3, BookOpen, MessageSquare, Inbox, UsersRound } from 'lucide-react'
 
 interface SiteSettings {
   siteName?: string | null
@@ -33,6 +33,7 @@ export default function Navbar({ settings }: NavbarClientProps) {
   const siteName = settings?.siteName || 'Dusun Dlingo'
 
   // Build dynamic navigation based on settings
+  // Urutan: Beranda > Profil > Pengumuman > Kegiatan > Karang Taruna > Demografi > Edukasi > Galeri > Kotak Saran > Kontak
   const buildNavigation = () => {
     const nav: NavItem[] = [
       { name: 'Beranda', href: '/', icon: Home },
@@ -46,55 +47,42 @@ export default function Navbar({ settings }: NavbarClientProps) {
       },
     ]
 
-    // Data & Informasi - conditional children
-    const dataInfoChildren: Array<{ name: string; href: string }> = []
-    if (settings?.showDemographics !== false) {
-      dataInfoChildren.push({ name: 'Demografi', href: '/data/demografi' })
-    }
-    if (settings?.showSuggestionBox !== false) {
-      dataInfoChildren.push({ name: 'Kotak Saran', href: '/informasi/saran' })
-    }
-    if (dataInfoChildren.length > 0) {
-      nav.push({
-        name: 'Data & Informasi',
-        icon: BarChart3,
-        children: dataInfoChildren,
-      })
-    }
-
-    // Kegiatan - conditional display and children
-    if (settings?.showKegiatan !== false) {
-      const kegiatanChildren: Array<{ name: string; href: string }> = [
-        { name: 'Bank Sampah', href: '/kegiatan/bank-sampah' },
-        { name: 'Pengajian', href: '/kegiatan/pengajian' },
-      ]
-
-      if (settings?.showKarangTaruna !== false) {
-        kegiatanChildren.push({ name: 'Karang Taruna', href: '/kegiatan/karang-taruna' })
-      }
-
-      kegiatanChildren.push({ name: 'Semua Kegiatan', href: '/kegiatan' })
-
-      nav.push({
-        name: 'Kegiatan',
-        icon: Calendar,
-        children: kegiatanChildren,
-      })
-    }
-
-    if (settings?.showEdukasi !== false) {
-      nav.push({ name: 'Portal Edukasi', href: '/edukasi', icon: BookOpen })
-    }
-    if (settings?.showForum !== false) {
-      nav.push({ name: 'Forum', href: '/forum', icon: MessageSquare })
-    }
+    // Pengumuman - informasi penting untuk warga
     if (settings?.showPengumuman !== false) {
       nav.push({ name: 'Pengumuman', href: '/pengumuman', icon: Bell })
     }
+
+    // Kegiatan - aktivitas rutin dusun
+    if (settings?.showKegiatan !== false) {
+      nav.push({ name: 'Kegiatan', href: '/kegiatan', icon: Calendar })
+    }
+
+    // Karang Taruna - organisasi pemuda
+    if (settings?.showKarangTaruna !== false) {
+      nav.push({ name: 'Karang Taruna', href: '/karang-taruna', icon: UsersRound })
+    }
+
+    // Demografi - data statistik penduduk
+    if (settings?.showDemographics !== false) {
+      nav.push({ name: 'Demografi', href: '/data/demografi', icon: BarChart3 })
+    }
+
+    // Portal Edukasi - artikel edukatif
+    if (settings?.showEdukasi !== false) {
+      nav.push({ name: 'Edukasi', href: '/edukasi', icon: BookOpen })
+    }
+
+    // Galeri - dokumentasi foto
     if (settings?.showGallery !== false) {
       nav.push({ name: 'Galeri', href: '/galeri', icon: ImageIcon })
     }
 
+    // Kotak Saran - feedback warga
+    if (settings?.showSuggestionBox !== false) {
+      nav.push({ name: 'Kotak Saran', href: '/informasi/saran', icon: Inbox })
+    }
+
+    // Kontak - selalu di akhir
     nav.push({ name: 'Kontak', href: '/kontak', icon: Phone })
 
     return nav
@@ -104,11 +92,26 @@ export default function Navbar({ settings }: NavbarClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const pathname = usePathname()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
     return pathname.startsWith(href)
   }
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm shadow-soft sticky top-0 z-40 border-b border-gray-100">
@@ -133,16 +136,15 @@ export default function Navbar({ settings }: NavbarClientProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-1">
+          <div className="hidden lg:flex lg:items-center lg:space-x-1" ref={dropdownRef}>
             {navigation.map((item) => (
               <div key={item.name} className="relative">
                 {item.children ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setOpenDropdown(item.name)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                  >
+                  <div className="relative">
                     <button
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === item.name ? null : item.name)
+                      }
                       className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                         item.children.some((child) => isActive(child.href))
                           ? 'text-primary-600 bg-primary-50'
@@ -162,6 +164,7 @@ export default function Navbar({ settings }: NavbarClientProps) {
                           <Link
                             key={child.href}
                             href={child.href}
+                            onClick={() => setOpenDropdown(null)}
                             className={`block px-4 py-2.5 text-sm transition-all duration-150 ${
                               isActive(child.href)
                                 ? 'text-primary-600 bg-primary-50 font-medium'

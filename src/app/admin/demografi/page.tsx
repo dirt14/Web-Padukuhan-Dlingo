@@ -12,6 +12,7 @@ interface DemographicsData {
   ageData: Array<{ ageGroup: string; count: number }>
   educationData: Array<{ level: string; count: number }>
   occupationData: Array<{ type: string; count: number }>
+  rtData: Array<{ rt: string; households: number; population: number }>
 }
 
 export default function DemografiAdminPage() {
@@ -54,6 +55,16 @@ export default function DemografiAdminPage() {
       { type: 'Pelajar/Mahasiswa', count: 0 },
       { type: 'Ibu Rumah Tangga', count: 0 },
       { type: 'Lainnya', count: 0 }
+    ],
+    rtData: [
+      { rt: 'RT 22', households: 0, population: 0 },
+      { rt: 'RT 23', households: 0, population: 0 },
+      { rt: 'RT 24', households: 0, population: 0 },
+      { rt: 'RT 25', households: 0, population: 0 },
+      { rt: 'RT 26', households: 0, population: 0 },
+      { rt: 'RT 27', households: 0, population: 0 },
+      { rt: 'RT 28', households: 0, population: 0 },
+      { rt: 'RT 29', households: 0, population: 0 }
     ]
   })
 
@@ -74,7 +85,17 @@ export default function DemografiAdminPage() {
             femaleCount: data.femaleCount,
             ageData: JSON.parse(data.ageData),
             educationData: JSON.parse(data.educationData),
-            occupationData: JSON.parse(data.occupationData)
+            occupationData: JSON.parse(data.occupationData),
+            rtData: data.rtData ? JSON.parse(data.rtData) : [
+              { rt: 'RT 22', households: 0, population: 0 },
+              { rt: 'RT 23', households: 0, population: 0 },
+              { rt: 'RT 24', households: 0, population: 0 },
+              { rt: 'RT 25', households: 0, population: 0 },
+              { rt: 'RT 26', households: 0, population: 0 },
+              { rt: 'RT 27', households: 0, population: 0 },
+              { rt: 'RT 28', households: 0, population: 0 },
+              { rt: 'RT 29', households: 0, population: 0 }
+            ]
           })
         }
       }
@@ -129,6 +150,12 @@ export default function DemografiAdminPage() {
     const newOccupationData = [...formData.occupationData]
     newOccupationData[index].count = value
     setFormData({ ...formData, occupationData: newOccupationData })
+  }
+
+  const updateRtData = (index: number, field: 'households' | 'population', value: number) => {
+    const newRtData = [...formData.rtData]
+    newRtData[index][field] = value
+    setFormData({ ...formData, rtData: newRtData })
   }
 
   if (loading) {
@@ -268,6 +295,59 @@ export default function DemografiAdminPage() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* RT Distribution */}
+        <div className="card p-6">
+          <h2 className="text-lg font-bold text-gray-900 mb-4">Data Per RT (RT 22 - RT 29)</h2>
+          <p className="text-sm text-gray-600 mb-4">Masukkan jumlah Kepala Keluarga (KK) dan jumlah jiwa untuk setiap RT</p>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-semibold text-gray-700">RT</th>
+                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Jumlah KK</th>
+                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Jumlah Jiwa</th>
+                </tr>
+              </thead>
+              <tbody>
+                {formData.rtData.map((item, index) => (
+                  <tr key={index} className="border-b border-gray-100">
+                    <td className="py-3 px-4 font-medium text-gray-900">{item.rt}</td>
+                    <td className="py-3 px-4">
+                      <input
+                        type="number"
+                        value={item.households}
+                        onChange={(e) => updateRtData(index, 'households', parseInt(e.target.value) || 0)}
+                        className="input w-32"
+                        placeholder="Jumlah KK"
+                      />
+                    </td>
+                    <td className="py-3 px-4">
+                      <input
+                        type="number"
+                        value={item.population}
+                        onChange={(e) => updateRtData(index, 'population', parseInt(e.target.value) || 0)}
+                        className="input w-32"
+                        placeholder="Jumlah jiwa"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="bg-gray-50">
+                  <td className="py-3 px-4 font-bold text-gray-900">Total</td>
+                  <td className="py-3 px-4 font-bold text-primary-600">
+                    {formData.rtData.reduce((sum, item) => sum + item.households, 0)} KK
+                  </td>
+                  <td className="py-3 px-4 font-bold text-primary-600">
+                    {formData.rtData.reduce((sum, item) => sum + item.population, 0)} Jiwa
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
 

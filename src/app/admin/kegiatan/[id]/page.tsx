@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Save, Image as ImageIcon } from 'lucide-react'
+import RichTextEditor from '@/components/RichTextEditor'
 
 const categories = [
-  { value: 'BANK_SAMPAH', label: 'Bank Sampah' },
-  { value: 'PENGAJIAN', label: 'Pengajian' },
-  { value: 'KARANG_TARUNA', label: 'Karang Taruna' },
+  { value: 'SOSIAL', label: 'Sosial' },
+  { value: 'KEAGAMAAN', label: 'Keagamaan' },
+  { value: 'BUDAYA', label: 'Budaya' },
   { value: 'LAINNYA', label: 'Lainnya' },
 ]
 
@@ -204,11 +205,9 @@ export default function EditActivityPage() {
 
           <div>
             <label className="label">Detail Kegiatan</label>
-            <textarea
+            <RichTextEditor
               value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              rows={8}
-              className="input"
+              onChange={(value) => setForm({ ...form, content: value })}
               placeholder="Tulis detail kegiatan..."
             />
           </div>

@@ -7,6 +7,19 @@ import { slugify } from '@/lib/utils'
 // Force dynamic rendering for this route
 export const dynamic = 'force-dynamic'
 
+export async function GET() {
+  try {
+    const announcements = await prisma.announcement.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: { author: { select: { name: true } } }
+    })
+    return NextResponse.json({ announcements })
+  } catch (error) {
+    console.error('Get announcements error:', error)
+    return NextResponse.json({ announcements: [] })
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
@@ -28,6 +41,8 @@ export async function POST(request: NextRequest) {
         priority: data.priority,
         status: data.status,
         showAsNotification: data.showAsNotification || false,
+        activeStart: data.activeStart ? new Date(data.activeStart) : null,
+        activeEnd: data.activeEnd ? new Date(data.activeEnd) : null,
         publishedAt: data.status === 'PUBLISHED' ? new Date() : null,
         authorId: session.user.id
       }

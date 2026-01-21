@@ -62,6 +62,8 @@ export async function PUT(
         priority: data.priority,
         status: data.status,
         showAsNotification: data.showAsNotification || false,
+        activeStart: data.activeStart ? new Date(data.activeStart) : null,
+        activeEnd: data.activeEnd ? new Date(data.activeEnd) : null,
         publishedAt: data.status === 'PUBLISHED' && !existing.publishedAt ? new Date() : existing.publishedAt
       }
     })

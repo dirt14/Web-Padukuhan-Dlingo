@@ -4,6 +4,10 @@ import Image from 'next/image'
 import { BookOpen, Clock, Eye, ArrowRight } from 'lucide-react'
 import prisma from '@/lib/db'
 
+// Disable caching - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Portal Edukasi',
   description: 'Artikel dan informasi edukatif untuk warga Dusun Dlingo'
@@ -24,60 +28,6 @@ async function getArticles() {
 
 export default async function EdukasiPage() {
   const articles = await getArticles()
-
-  // Default articles jika database kosong
-  const defaultArticles = [
-    {
-      id: '1',
-      title: 'Tips Menjaga Kesehatan di Musim Hujan',
-      slug: 'tips-kesehatan-musim-hujan',
-      excerpt: 'Musim hujan membawa berbagai penyakit. Simak tips menjaga kesehatan keluarga Anda di musim hujan.',
-      image: '/images/placeholder-health.jpg',
-      category: 'KESEHATAN',
-      views: 250,
-      publishedAt: new Date('2024-01-15'),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: '2',
-      title: 'Budidaya Sayuran Organik di Pekarangan Rumah',
-      slug: 'budidaya-sayuran-organik',
-      excerpt: 'Pelajari cara menanam sayuran organik di pekarangan rumah untuk kebutuhan keluarga sehari-hari.',
-      image: '/images/placeholder-agri.jpg',
-      category: 'PERTANIAN',
-      views: 180,
-      publishedAt: new Date('2024-01-10'),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: '3',
-      title: 'Memulai Usaha Kecil dari Rumah',
-      slug: 'memulai-usaha-kecil',
-      excerpt: 'Panduan lengkap memulai usaha kecil-kecilan dari rumah dengan modal terbatas.',
-      image: '/images/placeholder-business.jpg',
-      category: 'KEWIRAUSAHAAN',
-      views: 320,
-      publishedAt: new Date('2024-01-08'),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: '4',
-      title: 'Pentingnya Pendidikan Karakter untuk Anak',
-      slug: 'pendidikan-karakter-anak',
-      excerpt: 'Membangun karakter anak sejak dini untuk masa depan yang lebih baik.',
-      image: '/images/placeholder-education.jpg',
-      category: 'PENDIDIKAN',
-      views: 200,
-      publishedAt: new Date('2024-01-05'),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-  ]
-
-  const displayArticles = articles.length > 0 ? articles : defaultArticles
 
   const categories = {
     KESEHATAN: { label: 'Kesehatan', color: 'bg-green-100 text-green-800' },
@@ -121,21 +71,27 @@ export default async function EdukasiPage() {
         </div>
 
         {/* Articles Grid */}
-        {displayArticles.length > 0 ? (
+        {articles.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayArticles.map((article) => (
+            {articles.map((article) => (
               <Link
                 key={article.id}
                 href={`/edukasi/${article.slug}`}
                 className="card overflow-hidden group hover:shadow-lg transition-shadow"
               >
-                {article.image && (
-                  <div className="aspect-video bg-gray-200 overflow-hidden">
+                <div className="aspect-video bg-gray-200 overflow-hidden">
+                  {article.image ? (
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
                       <BookOpen className="h-12 w-12 text-primary-400" />
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <span

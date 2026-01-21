@@ -7,26 +7,24 @@ import { ArrowLeft, Save, Image as ImageIcon } from 'lucide-react'
 import RichTextEditor from '@/components/RichTextEditor'
 
 const categories = [
-  { value: 'BANTUAN_SOSIAL', label: 'Bantuan Sosial' },
   { value: 'KESEHATAN', label: 'Kesehatan' },
-  { value: 'KEGIATAN_DUSUN', label: 'Kegiatan Dusun' },
-  { value: 'UMUM', label: 'Umum' },
+  { value: 'PERTANIAN', label: 'Pertanian' },
+  { value: 'KEWIRAUSAHAAN', label: 'Kewirausahaan' },
+  { value: 'PENDIDIKAN', label: 'Pendidikan' },
+  { value: 'LAINNYA', label: 'Lainnya' },
 ]
 
-export default function NewAnnouncementPage() {
+export default function NewArticlePage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     title: '',
     content: '',
     excerpt: '',
-    category: 'UMUM',
-    priority: 'NORMAL',
+    category: 'LAINNYA',
+    tags: '',
     status: 'DRAFT',
-    image: '',
-    showAsNotification: false,
-    activeStart: '',
-    activeEnd: ''
+    image: ''
   })
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,18 +53,18 @@ export default function NewAnnouncementPage() {
     setLoading(true)
 
     try {
-      const res = await fetch('/api/admin/announcements', {
+      const res = await fetch('/api/admin/articles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
       })
 
       if (res.ok) {
-        router.push('/admin/pengumuman')
+        router.push('/admin/edukasi')
         router.refresh()
       } else {
         const data = await res.json()
-        alert(data.error || 'Gagal menyimpan pengumuman')
+        alert(data.error || 'Gagal menyimpan artikel')
       }
     } catch {
       alert('Terjadi kesalahan')
@@ -78,24 +76,24 @@ export default function NewAnnouncementPage() {
   return (
     <div>
       <div className="mb-6">
-        <Link href="/admin/pengumuman" className="inline-flex items-center text-sm text-gray-600 hover:text-primary-600 mb-4">
+        <Link href="/admin/edukasi" className="inline-flex items-center text-sm text-gray-600 hover:text-primary-600 mb-4">
           <ArrowLeft className="h-4 w-4 mr-1" />
           Kembali
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900">Buat Pengumuman Baru</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Buat Artikel Baru</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div className="grid gap-6">
           <div>
-            <label className="label">Judul *</label>
+            <label className="label">Judul Artikel *</label>
             <input
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               required
               className="input"
-              placeholder="Judul pengumuman"
+              placeholder="Judul artikel"
             />
           </div>
 
@@ -113,15 +111,15 @@ export default function NewAnnouncementPage() {
               </select>
             </div>
             <div>
-              <label className="label">Prioritas</label>
-              <select
-                value={form.priority}
-                onChange={(e) => setForm({ ...form, priority: e.target.value })}
+              <label className="label">Tags</label>
+              <input
+                type="text"
+                value={form.tags}
+                onChange={(e) => setForm({ ...form, tags: e.target.value })}
                 className="input"
-              >
-                <option value="NORMAL">Normal</option>
-                <option value="IMPORTANT">Penting</option>
-              </select>
+                placeholder="Pisahkan dengan koma (opsional)"
+              />
+              <p className="text-xs text-gray-500 mt-1">Contoh: kesehatan, tips, keluarga</p>
             </div>
           </div>
 
@@ -132,16 +130,16 @@ export default function NewAnnouncementPage() {
               value={form.excerpt}
               onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
               className="input"
-              placeholder="Ringkasan singkat (opsional)"
+              placeholder="Ringkasan singkat artikel (opsional)"
             />
           </div>
 
           <div>
-            <label className="label">Isi Pengumuman *</label>
+            <label className="label">Konten Artikel *</label>
             <RichTextEditor
               value={form.content}
               onChange={(value) => setForm({ ...form, content: value })}
-              placeholder="Tulis isi pengumuman..."
+              placeholder="Tulis konten artikel..."
             />
           </div>
 
@@ -167,47 +165,6 @@ export default function NewAnnouncementPage() {
                 <p className="text-xs text-gray-500 mt-1">Format: JPG, PNG. Max 5MB</p>
               </div>
             </div>
-          </div>
-
-          {/* Kurun Waktu Aktif */}
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <h3 className="font-medium text-blue-900 mb-3">Kurun Waktu Aktif (Opsional)</h3>
-            <p className="text-sm text-blue-700 mb-4">
-              Atur kapan pengumuman ini akan ditampilkan. Kosongkan jika ingin selalu aktif.
-            </p>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="label">Tanggal Mulai</label>
-                <input
-                  type="datetime-local"
-                  value={form.activeStart}
-                  onChange={(e) => setForm({ ...form, activeStart: e.target.value })}
-                  className="input"
-                />
-              </div>
-              <div>
-                <label className="label">Tanggal Berakhir</label>
-                <input
-                  type="datetime-local"
-                  value={form.activeEnd}
-                  onChange={(e) => setForm({ ...form, activeEnd: e.target.value })}
-                  className="input"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="notification"
-              checked={form.showAsNotification}
-              onChange={(e) => setForm({ ...form, showAsNotification: e.target.checked })}
-              className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-            />
-            <label htmlFor="notification" className="text-sm text-gray-700">
-              Tampilkan sebagai notifikasi di homepage
-            </label>
           </div>
 
           <div>
@@ -238,7 +195,7 @@ export default function NewAnnouncementPage() {
         </div>
 
         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-end space-x-4">
-          <Link href="/admin/pengumuman" className="btn-secondary">
+          <Link href="/admin/edukasi" className="btn-secondary">
             Batal
           </Link>
           <button type="submit" disabled={loading} className="btn-primary">

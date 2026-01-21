@@ -66,6 +66,35 @@ export async function PUT(
       }
     })
 
+    // Jika gambar berubah, update atau tambahkan ke galeri
+    if (data.image && data.image !== existing.image) {
+      // Cek apakah sudah ada foto untuk kegiatan ini
+      const existingPhoto = await prisma.photo.findFirst({
+        where: { activityId: id }
+      })
+
+      if (existingPhoto) {
+        // Update foto yang ada
+        await prisma.photo.update({
+          where: { id: existingPhoto.id },
+          data: {
+            url: data.image,
+            caption: `Foto kegiatan: ${data.title}`
+          }
+        })
+      } else {
+        // Buat foto baru
+        await prisma.photo.create({
+          data: {
+            url: data.image,
+            caption: `Foto kegiatan: ${data.title}`,
+            category: 'KEGIATAN',
+            activityId: id
+          }
+        })
+      }
+    }
+
     return NextResponse.json({ activity })
   } catch (error) {
     console.error('Update activity error:', error)

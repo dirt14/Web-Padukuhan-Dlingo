@@ -5,6 +5,10 @@ import { Calendar, User, ArrowLeft, AlertTriangle, Share2 } from 'lucide-react'
 import prisma from '@/lib/db'
 import { getCategoryLabel, formatDateTime } from '@/lib/utils'
 
+// Disable caching - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 interface Props {
   params: Promise<{ slug: string }>
 }
@@ -89,14 +93,10 @@ export default async function AnnouncementDetailPage({ params }: Props) {
 
         {/* Content */}
         <div className="card p-6 md:p-8">
-          <div className="prose prose-gray max-w-none">
-            {announcement.content.split('\n').map((paragraph, i) => {
-              if (paragraph.trim()) {
-                return <p key={i} className="text-gray-700 leading-relaxed mb-4">{paragraph}</p>
-              }
-              return null
-            })}
-          </div>
+          <div
+            className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary-600 prose-strong:text-gray-900"
+            dangerouslySetInnerHTML={{ __html: announcement.content }}
+          />
         </div>
 
         {/* Share */}

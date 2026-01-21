@@ -1,23 +1,72 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Plus, Edit, Trash2, Eye, Calendar } from 'lucide-react'
-import prisma from '@/lib/db'
-import { formatDate, getCategoryLabel } from '@/lib/utils'
+import { Plus, Edit, Eye, Calendar } from 'lucide-react'
 import DeleteButton from '@/components/admin/DeleteButton'
 
-async function getActivities() {
-  try {
-    const activities = await prisma.activity.findMany({
-      orderBy: { createdAt: 'desc' },
-      include: { author: { select: { name: true } } }
-    })
-    return activities
-  } catch {
-    return []
-  }
+interface Activity {
+  id: string
+  title: string
+  slug: string
+  description: string
+  category: string
+  schedule: string | null
+  status: string
+  author?: { name: string } | null
 }
 
-export default async function AdminActivitiesPage() {
-  const activities = await getActivities()
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  })
+}
+
+function getCategoryLabel(category: string) {
+  const labels: Record<string, string> = {
+    SOSIAL: 'Sosial',
+    KEAGAMAAN: 'Keagamaan',
+    BUDAYA: 'Budaya',
+    LAINNYA: 'Lainnya'
+  }
+  return labels[category] || category
+}
+
+export default function AdminActivitiesPage() {
+  const [activities, setActivities] = useState<Activity[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchActivities()
+  }, [])
+
+  const fetchActivities = async () => {
+    try {
+      const res = await fetch('/api/admin/activities')
+      const data = await res.json()
+      if (data.activities) {
+        setActivities(data.activities)
+      }
+    } catch {
+      setActivities([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleActivityDeleted = (id: string) => {
+    setActivities(activities.filter(a => a.id !== id))
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin h-8 w-8 border-4 border-primary-500 border-t-transparent rounded-full"></div>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -88,7 +137,11 @@ export default async function AdminActivitiesPage() {
                         >
                           <Edit className="h-4 w-4" />
                         </Link>
-                        <DeleteButton id={item.id} type="activity" />
+                        <DeleteButton
+                          id={item.id}
+                          type="activity"
+                          onDeleted={() => handleActivityDeleted(item.id)}
+                        />
                       </div>
                     </td>
                   </tr>

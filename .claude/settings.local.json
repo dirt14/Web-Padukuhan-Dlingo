@@ -15,7 +15,9 @@
       "Bash(npm run build:*)",
       "Bash(ls:*)",
       "Bash(test:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(taskkill:*)",
+      "Bash(timeout /t 15 /nobreak)"
     ]
   }
 }

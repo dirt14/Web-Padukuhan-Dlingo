@@ -19,7 +19,6 @@ export default function AdminPengaturanPage() {
     footerText: '',
 
     // Feature toggles
-    showForum: true,
     showDemographics: true,
     showSuggestionBox: true,
     showGallery: true,
@@ -46,6 +45,10 @@ export default function AdminPengaturanPage() {
     karangTarunaName: '',
     karangTarunaPhone: '',
 
+    // Secretariat
+    secretariatAddress: '',
+    secretariatMapUrl: '',
+
     // Social media
     facebook: '',
     instagram: '',
@@ -69,7 +72,6 @@ export default function AdminPengaturanPage() {
             heroSubtitle: data.settings.heroSubtitle || '',
             footerText: data.settings.footerText || '',
 
-            showForum: data.settings.showForum !== false,
             showDemographics: data.settings.showDemographics !== false,
             showSuggestionBox: data.settings.showSuggestionBox !== false,
             showGallery: data.settings.showGallery !== false,
@@ -91,6 +93,9 @@ export default function AdminPengaturanPage() {
 
             karangTarunaName: data.settings.karangTarunaName || '',
             karangTarunaPhone: data.settings.karangTarunaPhone || '',
+
+            secretariatAddress: data.settings.secretariatAddress || '',
+            secretariatMapUrl: data.settings.secretariatMapUrl || '',
 
             facebook: data.settings.facebook || '',
             instagram: data.settings.instagram || '',
@@ -134,14 +139,19 @@ export default function AdminPengaturanPage() {
         body: JSON.stringify(form)
       })
 
+      const data = await res.json()
+
       if (res.ok) {
         setMessage({ type: 'success', text: 'Pengaturan berhasil disimpan!' })
-        window.location.reload()
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
-        setMessage({ type: 'error', text: 'Gagal menyimpan pengaturan' })
+        setMessage({ type: 'error', text: data.details || data.error || 'Gagal menyimpan pengaturan' })
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       }
-    } catch {
-      setMessage({ type: 'error', text: 'Terjadi kesalahan' })
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Terjadi kesalahan saat menyimpan' })
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } finally {
       setLoading(false)
     }
@@ -228,7 +238,6 @@ export default function AdminPengaturanPage() {
           <p className="text-sm text-gray-600 mb-4">Aktifkan atau nonaktifkan menu yang tampil di navbar</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { key: 'showForum', label: 'Forum Diskusi' },
               { key: 'showDemographics', label: 'Data Demografi' },
               { key: 'showSuggestionBox', label: 'Kotak Saran' },
               { key: 'showGallery', label: 'Galeri' },
@@ -379,6 +388,36 @@ export default function AdminPengaturanPage() {
                     className="input"
                     placeholder="+62 813 9876 5432"
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Alamat Sekretariat */}
+            <div className="border-t pt-6">
+              <h3 className="font-semibold text-gray-900 mb-3">Alamat Sekretariat</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="label">Alamat Lengkap Sekretariat</label>
+                  <textarea
+                    value={form.secretariatAddress}
+                    onChange={(e) => setForm({ ...form, secretariatAddress: e.target.value })}
+                    rows={2}
+                    className="input"
+                    placeholder="Alamat lengkap lokasi sekretariat"
+                  />
+                </div>
+                <div>
+                  <label className="label">Google Maps Embed URL</label>
+                  <textarea
+                    value={form.secretariatMapUrl}
+                    onChange={(e) => setForm({ ...form, secretariatMapUrl: e.target.value })}
+                    rows={3}
+                    className="input"
+                    placeholder="https://www.google.com/maps/embed?pb=..."
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Cara mendapatkan: Buka Google Maps → Pilih lokasi → Klik &quot;Share&quot; → Klik &quot;Embed a map&quot; → Salin URL dari src=&quot;...&quot;
+                  </p>
                 </div>
               </div>
             </div>

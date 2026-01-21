@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Save, Image as ImageIcon } from 'lucide-react'
+import RichTextEditor from '@/components/RichTextEditor'
 
 const categories = [
   { value: 'BANTUAN_SOSIAL', label: 'Bantuan Sosial' },
@@ -25,7 +26,9 @@ export default function EditAnnouncementPage() {
     priority: 'NORMAL',
     status: 'DRAFT',
     image: '',
-    showAsNotification: false
+    showAsNotification: false,
+    activeStart: '',
+    activeEnd: ''
   })
 
   useEffect(() => {
@@ -35,6 +38,13 @@ export default function EditAnnouncementPage() {
         if (res.ok) {
           const data = await res.json()
           const announcement = data.announcement
+          // Format datetime untuk input
+          const formatDateTimeLocal = (date: string | null) => {
+            if (!date) return ''
+            const d = new Date(date)
+            return d.toISOString().slice(0, 16)
+          }
+
           setForm({
             title: announcement.title || '',
             content: announcement.content || '',
@@ -43,7 +53,9 @@ export default function EditAnnouncementPage() {
             priority: announcement.priority || 'NORMAL',
             status: announcement.status || 'DRAFT',
             image: announcement.image || '',
-            showAsNotification: announcement.showAsNotification || false
+            showAsNotification: announcement.showAsNotification || false,
+            activeStart: formatDateTimeLocal(announcement.activeStart),
+            activeEnd: formatDateTimeLocal(announcement.activeEnd)
           })
         } else {
           alert('Gagal memuat data pengumuman')
@@ -179,12 +191,9 @@ export default function EditAnnouncementPage() {
 
           <div>
             <label className="label">Isi Pengumuman *</label>
-            <textarea
+            <RichTextEditor
               value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              required
-              rows={8}
-              className="input"
+              onChange={(value) => setForm({ ...form, content: value })}
               placeholder="Tulis isi pengumuman..."
             />
           </div>
@@ -209,6 +218,34 @@ export default function EditAnnouncementPage() {
                   className="input"
                 />
                 <p className="text-xs text-gray-500 mt-1">Format: JPG, PNG. Max 5MB</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Kurun Waktu Aktif */}
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <h3 className="font-medium text-blue-900 mb-3">Kurun Waktu Aktif (Opsional)</h3>
+            <p className="text-sm text-blue-700 mb-4">
+              Atur kapan pengumuman ini akan ditampilkan. Kosongkan jika ingin selalu aktif.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="label">Tanggal Mulai</label>
+                <input
+                  type="datetime-local"
+                  value={form.activeStart}
+                  onChange={(e) => setForm({ ...form, activeStart: e.target.value })}
+                  className="input"
+                />
+              </div>
+              <div>
+                <label className="label">Tanggal Berakhir</label>
+                <input
+                  type="datetime-local"
+                  value={form.activeEnd}
+                  onChange={(e) => setForm({ ...form, activeEnd: e.target.value })}
+                  className="input"
+                />
               </div>
             </div>
           </div>

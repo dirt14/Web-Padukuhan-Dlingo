@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Save, Trash2, User } from 'lucide-react'
+import { Plus, Save, Trash2, User, Info, Camera } from 'lucide-react'
 
 interface Member {
   id?: string
@@ -45,7 +45,30 @@ export default function AdminStrukturPage() {
   }
 
   const removeMember = (index: number) => {
-    setMembers(members.filter((_, i) => i !== index))
+    if (confirm('Apakah Anda yakin ingin menghapus pengurus ini? Jangan lupa klik "Simpan" untuk menyimpan perubahan.')) {
+      setMembers(members.filter((_, i) => i !== index))
+    }
+  }
+
+  const handleImageUpload = async (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      })
+      const data = await res.json()
+      if (data.url) {
+        updateMember(index, 'image', data.url)
+      }
+    } catch {
+      alert('Gagal mengupload gambar')
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,13 +107,36 @@ export default function AdminStrukturPage() {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start gap-3">
+          <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+          <div className="text-sm text-blue-800">
+            <p className="font-medium">Petunjuk:</p>
+            <p>Setelah menambah, mengedit, atau menghapus pengurus, pastikan klik tombol <strong>&quot;Simpan&quot;</strong> untuk menyimpan perubahan ke database.</p>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         {members.length > 0 ? (
           <div className="space-y-4">
             {members.map((member, index) => (
               <div key={index} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <User className="h-8 w-8 text-primary-600" />
+                <div className="relative flex-shrink-0">
+                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center overflow-hidden">
+                    {member.image ? (
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <User className="h-8 w-8 text-primary-600" />
+                    )}
+                  </div>
+                  <label className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-primary-700 transition-colors">
+                    <Camera className="h-3 w-3 text-white" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(index, e)}
+                      className="hidden"
+                    />
+                  </label>
                 </div>
                 <div className="flex-1 grid sm:grid-cols-4 gap-4">
                   <div>

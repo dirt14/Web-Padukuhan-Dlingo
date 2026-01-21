@@ -7,6 +7,19 @@ import { slugify } from '@/lib/utils'
 // Force dynamic rendering for this route
 export const dynamic = 'force-dynamic'
 
+export async function GET() {
+  try {
+    const activities = await prisma.activity.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: { author: { select: { name: true } } }
+    })
+    return NextResponse.json({ activities })
+  } catch (error) {
+    console.error('Get activities error:', error)
+    return NextResponse.json({ activities: [] })
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
@@ -32,6 +45,18 @@ export async function POST(request: NextRequest) {
         authorId: session.user.id
       }
     })
+
+    // Jika ada gambar, otomatis tambahkan ke galeri
+    if (data.image) {
+      await prisma.photo.create({
+        data: {
+          url: data.image,
+          caption: `Foto kegiatan: ${data.title}`,
+          category: 'KEGIATAN',
+          activityId: activity.id
+        }
+      })
+    }
 
     return NextResponse.json({ activity })
   } catch (error) {

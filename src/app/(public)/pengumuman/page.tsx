@@ -4,6 +4,10 @@ import { Bell, Calendar, AlertTriangle } from 'lucide-react'
 import prisma from '@/lib/db'
 import { getCategoryLabel, formatDate, truncate } from '@/lib/utils'
 
+// Disable caching - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Pengumuman',
   description: 'Daftar pengumuman dan informasi penting untuk warga Dusun Dlingo'
@@ -11,8 +15,35 @@ export const metadata: Metadata = {
 
 async function getAnnouncements() {
   try {
+    const now = new Date()
+
     const announcements = await prisma.announcement.findMany({
-      where: { status: 'PUBLISHED' },
+      where: {
+        status: 'PUBLISHED',
+        // Filter berdasarkan kurun waktu aktif
+        OR: [
+          // Tidak ada batasan waktu (activeStart dan activeEnd kosong)
+          {
+            activeStart: null,
+            activeEnd: null
+          },
+          // Sudah mulai dan belum berakhir
+          {
+            activeStart: { lte: now },
+            activeEnd: { gte: now }
+          },
+          // Sudah mulai, tidak ada tanggal berakhir
+          {
+            activeStart: { lte: now },
+            activeEnd: null
+          },
+          // Belum ada tanggal mulai, belum berakhir
+          {
+            activeStart: null,
+            activeEnd: { gte: now }
+          }
+        ]
+      },
       orderBy: { publishedAt: 'desc' },
       include: { author: { select: { name: true } } }
     })

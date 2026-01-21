@@ -1,4 +1,4 @@
-# 🏡 Website Dusun Dlingo
+# Website Dusun Dlingo
 
 > Portal Informasi Resmi Dusun Dlingo - Modern, Responsive, & User-Friendly
 
@@ -7,65 +7,70 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![Prisma](https://img.shields.io/badge/Prisma-5.22-2D3748?style=flat&logo=prisma)](https://www.prisma.io/)
 
-Website resmi Dusun Dlingo yang menyediakan informasi lengkap untuk warga meliputi pengumuman, kegiatan, galeri, data demografi, forum diskusi, dan berbagai layanan digital lainnya.
+Website resmi Dusun Dlingo yang menyediakan informasi lengkap untuk warga meliputi pengumuman, kegiatan, galeri, data demografi, portal edukasi, dan berbagai layanan digital lainnya.
 
 ---
 
-## ✨ Features
+## Fitur
 
-### 🎯 Public Features
-- **Homepage** - Hero carousel, pengumuman terbaru, kegiatan terbaru
-- **Pengumuman** - Informasi & pengumuman penting dari dusun
-- **Kegiatan** - Jadwal & dokumentasi kegiatan dusun
-  - Bank Sampah
-  - Pengajian
-  - Karang Taruna
-- **Galeri** - Album foto & dokumentasi kegiatan
-- **Data Demografi** - Visualisasi data penduduk dengan charts interaktif
-- **Forum Diskusi** - Platform diskusi untuk warga (optional)
-- **Portal Edukasi** - Artikel edukasi untuk warga (optional)
-- **Kotak Saran** - Formulir saran & masukan dari warga
-- **Profil Dusun** - Visi & misi, struktur organisasi
-- **Kontak** - Informasi kontak dusun
+### Fitur Publik
+- **Beranda** - Hero section dengan carousel, statistik warga dinamis, pengumuman terbaru, kegiatan terbaru, artikel edukasi dengan animasi scroll reveal
+- **Profil Desa** - Visi & misi, struktur organisasi dusun
+- **Pengumuman** - Informasi & pengumuman penting dengan filter kategori (Bantuan Sosial, Kesehatan, Kegiatan Dusun, Umum)
+- **Kegiatan** - Jadwal & dokumentasi kegiatan dusun dengan kategori (Sosial, Keagamaan, Budaya, Lainnya)
+- **Karang Taruna** - Profil organisasi pemuda, visi misi, program kerja, dan struktur pengurus
+- **Data Demografi** - Visualisasi data penduduk dengan charts interaktif (populasi, gender, usia, pendidikan, pekerjaan, per RT)
+- **Portal Edukasi** - Artikel edukatif dengan kategori (Kesehatan, Pertanian, Kewirausahaan, Pendidikan, Lainnya) dan sistem komentar
+- **Galeri** - Album foto & dokumentasi kegiatan dengan lightbox viewer
+- **Kotak Saran** - Formulir saran & masukan dari warga dengan kategori
+- **Kontak** - Informasi kontak dusun, peta lokasi, dan form kontak
 
-### 🔐 Admin Features
-- **Dashboard** - Statistik & overview
-- **Content Management** - CRUD untuk semua konten
-  - Pengumuman
-  - Kegiatan
-  - Galeri (album & foto)
-  - Profil & struktur organisasi
-- **Notification Management** - Notifikasi site-wide
-- **Demographics Management** - Input & update data demografi
-- **Suggestion Management** - Review & manage saran warga
-- **Settings** - Konfigurasi website
-  - Site name & tagline
-  - Contact information
+### Fitur Admin
+- **Dashboard** - Statistik & overview dengan quick actions
+- **Profil Dusun** - Edit visi, misi, dan informasi dusun
+- **Struktur Organisasi** - CRUD struktur pengurus dusun dan karang taruna
+- **Pengumuman** - CRUD pengumuman dengan rich text editor, kurun waktu aktif, dan notifikasi
+- **Kegiatan** - CRUD kegiatan dengan upload foto dokumentasi otomatis
+- **Karang Taruna** - Edit profil, visi misi, dan program kerja
+- **Data Demografi** - Input & update data demografi penduduk per tahun
+- **Edukasi** - CRUD artikel edukatif dengan rich text editor
+- **Galeri** - Manajemen album dan foto
+- **Kotak Saran** - Review, respond, dan manage saran warga
+- **Pengaturan** - Konfigurasi website:
+  - Nama situs & tagline
+  - Hero images (1-3 gambar)
+  - Informasi kontak (Pak Dukuh, Karang Taruna, Sekretariat)
   - Social media links
   - Feature toggles (show/hide menu)
-  - Hero images (1-3 images)
-  - Footer content
 
-### 🎨 Design System
+### Fitur Tambahan
+- **Scroll Animations** - Animasi reveal saat scroll di halaman beranda
+- **Dynamic Statistics** - Data statistik warga dan program aktif diambil langsung dari database
+- **Rich Text Editor** - Editor Quill untuk konten pengumuman, kegiatan, dan artikel
+- **Role-based Access** - User roles (ADMIN/Pak Dukuh & KARANG_TARUNA)
+- **Dynamic Navigation** - Menu navbar menyesuaikan dengan pengaturan fitur
+- **Responsive Design** - Mobile-first design dengan navigasi mobile yang smooth
+
+### Design System
 - **Modern UI/UX** - Clean, minimalist, professional
 - **Fully Responsive** - Mobile-first design
-- **8 Reusable Components** - Button, Card, Input, Badge, Alert, Spinner, Skeleton, EmptyState
+- **Reusable Components** - Button, Card, Input, Badge, Alert, Spinner, Skeleton, EmptyState
 - **Consistent Color Palette** - Primary (Blue), Success (Green), Warning (Amber), Danger (Red), Info (Purple)
 - **Inter Font** - Modern & readable typography
-- **Smooth Animations** - Micro-interactions & transitions
-- **Light Mode Only** - Optimized single theme
+- **Smooth Animations** - Micro-interactions, transitions, scroll reveal effects
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Framework:** Next.js 14.2 (App Router)
 - **Language:** TypeScript 5
 - **Styling:** Tailwind CSS 3.4
-- **UI Components:** Custom component library (`/src/components/ui`)
+- **UI Components:** Custom component library
 - **Icons:** Lucide React
 - **Charts:** Recharts
+- **Rich Text:** React Quill
 
 ### Backend
 - **API:** Next.js API Routes
@@ -82,7 +87,7 @@ Website resmi Dusun Dlingo yang menyediakan informasi lengkap untuk warga melipu
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18.x or higher
 - npm or yarn
@@ -90,7 +95,7 @@ Website resmi Dusun Dlingo yang menyediakan informasi lengkap untuk warga melipu
 
 ---
 
-## 🛠️ Installation
+## Installation
 
 ### 1. Clone Repository
 
@@ -112,7 +117,6 @@ npm install
 cp .env.example .env
 
 # Edit .env with your values
-nano .env
 ```
 
 Required variables:
@@ -126,13 +130,13 @@ NEXTAUTH_URL="http://localhost:3000"
 
 ```bash
 # Generate Prisma Client
-npx prisma generate
+npm run db:generate
 
-# Run migrations
-npx prisma migrate dev
+# Push schema to database
+npm run db:push
 
 # (Optional) Seed database
-npx prisma db seed
+npm run db:seed
 ```
 
 ### 5. Run Development Server
@@ -145,74 +149,113 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 dusun-dlingo/
 ├── prisma/
 │   ├── schema.prisma          # Database schema
-│   ├── migrations/            # Database migrations
+│   ├── seed.ts                # Database seeder
 │   └── dev.db                 # SQLite database (dev)
 ├── public/
 │   ├── images/                # Static images
-│   ├── uploads/               # User uploads
-│   └── robots.txt             # SEO
+│   └── uploads/               # User uploads
 ├── src/
 │   ├── app/
 │   │   ├── (public)/          # Public pages
+│   │   │   ├── page.tsx           # Homepage
+│   │   │   ├── profil/            # Visi-misi, struktur
+│   │   │   ├── pengumuman/        # Pengumuman list & detail
+│   │   │   ├── kegiatan/          # Kegiatan list & detail
+│   │   │   ├── karang-taruna/     # Profil karang taruna
+│   │   │   ├── data/demografi/    # Data demografi
+│   │   │   ├── edukasi/           # Artikel edukasi
+│   │   │   ├── galeri/            # Galeri foto
+│   │   │   ├── informasi/saran/   # Kotak saran
+│   │   │   └── kontak/            # Halaman kontak
 │   │   ├── admin/             # Admin panel
+│   │   │   ├── page.tsx           # Dashboard
+│   │   │   ├── profil/            # Edit profil dusun
+│   │   │   ├── struktur/          # Struktur organisasi
+│   │   │   ├── pengumuman/        # CRUD pengumuman
+│   │   │   ├── kegiatan/          # CRUD kegiatan
+│   │   │   ├── karang-taruna/     # Edit karang taruna
+│   │   │   ├── demografi/         # Edit demografi
+│   │   │   ├── edukasi/           # CRUD artikel
+│   │   │   ├── galeri/            # Manajemen galeri
+│   │   │   ├── saran/             # Manajemen saran
+│   │   │   └── pengaturan/        # Site settings
 │   │   ├── api/               # API routes
+│   │   │   ├── admin/             # Admin APIs
+│   │   │   ├── articles/          # Public article APIs
+│   │   │   ├── auth/              # NextAuth routes
+│   │   │   └── upload/            # File upload
 │   │   ├── login/             # Login page
 │   │   ├── layout.tsx         # Root layout
-│   │   ├── globals.css        # Global styles
-│   │   └── sitemap.ts         # Dynamic sitemap
+│   │   └── globals.css        # Global styles
 │   ├── components/
-│   │   ├── ui/                # Reusable UI components
 │   │   ├── admin/             # Admin components
-│   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
+│   │   │   ├── AdminSidebar.tsx
+│   │   │   └── DeleteButton.tsx
+│   │   ├── HomeContent.tsx    # Homepage client component
+│   │   ├── ScrollReveal.tsx   # Scroll animation component
+│   │   ├── RichTextEditor.tsx # Quill editor wrapper
+│   │   ├── ArticleComments.tsx # Comment system
+│   │   ├── Navbar.tsx         # Navigation
+│   │   └── Footer.tsx         # Footer
 │   ├── lib/
 │   │   ├── auth.ts            # NextAuth config
 │   │   ├── db.ts              # Prisma client
-│   │   └── utils.ts
+│   │   └── utils.ts           # Utility functions
 │   └── types/
 ├── .env.example               # Environment template
 ├── next.config.js             # Next.js config
 ├── tailwind.config.ts         # Tailwind config
-├── DESIGN_SYSTEM.md           # Design system guide
-├── DEPLOYMENT.md              # Deployment guide
-├── PRODUCTION_CHECKLIST.md    # Pre-launch checklist
 └── README.md                  # This file
 ```
 
 ---
 
-## 🎨 Design System
+## Database Schema
 
-Comprehensive design system dengan:
-
-- **Color Palette** - Primary, Success, Warning, Danger, Info, Gray
-- **Typography** - Inter font, 9 size scales
-- **Components** - 8 reusable React components
-- **Animations** - Fade, slide, scale, pulse
-- **Responsive** - Mobile-first breakpoints
-
-📖 **Full Documentation:** [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)
-
----
-
-## 📚 Documentation
-
-- **[DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)** - Complete design system guide
-- **[UI_UX_IMPROVEMENTS.md](./UI_UX_IMPROVEMENTS.md)** - UI/UX enhancements summary
-- **[QUICK_START_UI.md](./QUICK_START_UI.md)** - Quick reference for UI components
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deployment guide (Vercel, VPS, etc)
-- **[PRODUCTION_CHECKLIST.md](./PRODUCTION_CHECKLIST.md)** - Pre-launch checklist
-- **[src/components/ui/README.md](./src/components/ui/README.md)** - Component API reference
+### Core Models
+- **User** - Admin users (ADMIN/KARANG_TARUNA roles)
+- **Announcement** - Pengumuman dengan kategori dan kurun waktu aktif
+- **Activity** - Kegiatan dusun dengan foto dokumentasi
+- **Photo/Album** - Galeri foto
+- **VillageProfile** - Profil dusun (visi, misi, dll)
+- **OrganizationMember** - Struktur organisasi (dusun & karang taruna)
+- **KarangTarunaProfile** - Profil khusus karang taruna
+- **Demographics** - Data demografi per tahun
+- **Article** - Artikel edukasi dengan komentar
+- **Suggestion** - Kotak saran warga
+- **SiteSettings** - Pengaturan website
+- **Notification** - Notifikasi site-wide
 
 ---
 
-## 🧪 Testing
+## API Endpoints
+
+### Public APIs
+- `GET /api/articles` - List published articles
+- `GET /api/articles/[slug]` - Get article detail
+- `POST /api/articles/[slug]/comments` - Add comment to article
+
+### Admin APIs (Protected)
+- `GET/POST /api/admin/announcements` - CRUD pengumuman
+- `GET/PUT/DELETE /api/admin/announcements/[id]` - Single pengumuman
+- `GET/POST /api/admin/activities` - CRUD kegiatan
+- `GET/PUT/DELETE /api/admin/activitys/[id]` - Single kegiatan
+- `GET/POST /api/admin/articles` - CRUD artikel
+- `GET/PUT/DELETE /api/admin/articles/[id]` - Single artikel
+- `GET/PUT /api/admin/demographics` - Data demografi
+- `GET/PUT /api/admin/settings` - Site settings
+- `GET/POST /api/admin/notifications` - Notifikasi
+- `POST /api/upload` - File upload
+
+---
+
+## Testing
 
 ```bash
 # Run build test
@@ -227,7 +270,7 @@ npm run lint
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Quick Deploy to Vercel (Recommended)
 
@@ -242,17 +285,16 @@ vercel
 vercel --prod
 ```
 
-### Other Platforms
-
-- **Netlify** - Connect GitHub repo, auto-deploy
-- **Railway** - One-click deploy with database
-- **VPS** - Ubuntu/Debian with PM2 & Nginx
-
-📖 **Full Guide:** [DEPLOYMENT.md](./DEPLOYMENT.md)
+### Environment Variables for Production
+```env
+DATABASE_URL="postgresql://..."
+NEXTAUTH_SECRET="generate-a-secure-random-string"
+NEXTAUTH_URL="https://your-domain.com"
+```
 
 ---
 
-## 🔐 Default Admin Login
+## Default Admin Login
 
 **Development only:**
 ```
@@ -260,94 +302,58 @@ Email: admin@dusundlingo.com
 Password: admin123
 ```
 
-⚠️ **IMPORTANT:** Change password immediately in production!
+**IMPORTANT:** Change password immediately in production!
 
 ---
 
-## 🛡️ Security
+## Security
 
-- ✅ Password hashing dengan bcrypt
-- ✅ Session-based authentication (NextAuth)
-- ✅ CSRF protection built-in
-- ✅ SQL injection prevention (Prisma)
-- ✅ XSS prevention (React escaping)
-- ✅ Environment variables for secrets
-- ✅ HTTPS recommended for production
-
----
-
-## 🔄 Update & Maintenance
-
-### Update Dependencies
-
-```bash
-# Check outdated packages
-npm outdated
-
-# Update packages
-npm update
-```
-
-### Database Migrations
-
-```bash
-# Create migration
-npx prisma migrate dev --name migration_name
-
-# Deploy to production
-npx prisma migrate deploy
-```
-
-### Backup Database
-
-```bash
-# PostgreSQL
-pg_dump -U user -d database > backup.sql
-
-# SQLite
-cp prisma/dev.db backup/dev_backup_$(date +%Y%m%d).db
-```
+- Password hashing dengan bcrypt
+- Session-based authentication (NextAuth)
+- CSRF protection built-in
+- SQL injection prevention (Prisma)
+- XSS prevention (React escaping)
+- Protected API routes with auth checks
+- Environment variables for secrets
+- HTTPS recommended for production
 
 ---
 
-## 📞 Support
+## Menu Order
+
+### Public Navigation
+1. Beranda
+2. Profil (Visi & Misi, Struktur Organisasi)
+3. Pengumuman
+4. Kegiatan
+5. Karang Taruna
+6. Demografi
+7. Edukasi
+8. Galeri
+9. Kotak Saran
+10. Kontak
+
+### Admin Sidebar
+1. Dashboard
+2. Profil Dusun
+3. Struktur Organisasi
+4. Pengumuman
+5. Kegiatan
+6. Karang Taruna
+7. Data Demografi
+8. Edukasi
+9. Galeri
+10. Kotak Saran
+11. Pengaturan
+
+---
+
+## Support
 
 **Issues & Bug Reports:**
 - GitHub Issues: [Create an issue](https://github.com/yourusername/dusun-dlingo/issues)
 
-**Contact:**
-- Email: dusundlingo@gmail.com
-- Phone: +62 812 3456 7890
-
 ---
 
-## 🗺️ Roadmap
-
-### Version 1.0 (Current) ✅
-- [x] Public website dengan semua fitur
-- [x] Admin panel lengkap
-- [x] Modern UI/UX design system
-- [x] Responsive design
-- [x] SEO optimization
-
-### Version 1.1 (Planned)
-- [ ] Email notifications
-- [ ] PWA (Progressive Web App)
-- [ ] Advanced search functionality
-- [ ] Export data (PDF, Excel)
-
-### Version 2.0 (Future)
-- [ ] Mobile app (React Native)
-- [ ] Push notifications
-- [ ] Payment integration
-
----
-
-## ⭐ Show Your Support
-
-Give a ⭐️ if this project helped you!
-
----
-
-**Website Dusun Dlingo** | Built with ❤️ using Next.js & TypeScript
-**Version:** 1.0.0 | **Last Updated:** 2026-01-11
+**Website Dusun Dlingo** | Built with Next.js & TypeScript
+**Version:** 1.0.0 | **Last Updated:** 2026-01-18

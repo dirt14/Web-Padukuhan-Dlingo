@@ -39,10 +39,13 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { year, totalPopulation, maleCount, femaleCount, ageData, educationData, occupationData } = body
+    const { year, totalPopulation, maleCount, femaleCount, ageData, educationData, occupationData, rtData } = body
 
-    // Validate required fields
-    if (!year || !totalPopulation || !maleCount || !femaleCount) {
+    // Validate required fields (use explicit check for undefined/null to allow 0 values)
+    if (year === undefined || year === null ||
+        totalPopulation === undefined || totalPopulation === null ||
+        maleCount === undefined || maleCount === null ||
+        femaleCount === undefined || femaleCount === null) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -54,6 +57,7 @@ export async function POST(request: Request) {
       if (ageData) JSON.parse(typeof ageData === 'string' ? ageData : JSON.stringify(ageData))
       if (educationData) JSON.parse(typeof educationData === 'string' ? educationData : JSON.stringify(educationData))
       if (occupationData) JSON.parse(typeof occupationData === 'string' ? occupationData : JSON.stringify(occupationData))
+      if (rtData) JSON.parse(typeof rtData === 'string' ? rtData : JSON.stringify(rtData))
     } catch {
       return NextResponse.json(
         { error: 'Invalid JSON data format' },
@@ -73,7 +77,8 @@ export async function POST(request: Request) {
         femaleCount: parseInt(femaleCount),
         ageData: typeof ageData === 'string' ? ageData : JSON.stringify(ageData),
         educationData: typeof educationData === 'string' ? educationData : JSON.stringify(educationData),
-        occupationData: typeof occupationData === 'string' ? occupationData : JSON.stringify(occupationData)
+        occupationData: typeof occupationData === 'string' ? occupationData : JSON.stringify(occupationData),
+        rtData: rtData ? (typeof rtData === 'string' ? rtData : JSON.stringify(rtData)) : null
       }
     })
 

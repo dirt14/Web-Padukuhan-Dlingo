@@ -4,6 +4,10 @@ import { Calendar, MapPin, User, ArrowRight } from 'lucide-react'
 import prisma from '@/lib/db'
 import { getCategoryLabel, truncate } from '@/lib/utils'
 
+// Disable caching - always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Kegiatan',
   description: 'Daftar kegiatan rutin dan program di Dusun Dlingo'
@@ -26,47 +30,11 @@ export default async function KegiatanPage() {
 
   const categories = [
     { id: 'all', name: 'Semua', count: activities.length },
-    { id: 'BANK_SAMPAH', name: 'Bank Sampah', count: activities.filter(a => a.category === 'BANK_SAMPAH').length },
-    { id: 'PENGAJIAN', name: 'Pengajian', count: activities.filter(a => a.category === 'PENGAJIAN').length },
-    { id: 'KARANG_TARUNA', name: 'Karang Taruna', count: activities.filter(a => a.category === 'KARANG_TARUNA').length },
+    { id: 'SOSIAL', name: 'Sosial', count: activities.filter(a => a.category === 'SOSIAL').length },
+    { id: 'KEAGAMAAN', name: 'Keagamaan', count: activities.filter(a => a.category === 'KEAGAMAAN').length },
+    { id: 'BUDAYA', name: 'Budaya', count: activities.filter(a => a.category === 'BUDAYA').length },
     { id: 'LAINNYA', name: 'Lainnya', count: activities.filter(a => a.category === 'LAINNYA').length },
   ]
-
-  // Default activities if none exist
-  const defaultActivities = [
-    {
-      id: '1',
-      title: 'Bank Sampah Dlingo',
-      slug: 'bank-sampah',
-      description: 'Program pengelolaan sampah berbasis masyarakat untuk menjaga kebersihan lingkungan dusun.',
-      category: 'BANK_SAMPAH',
-      schedule: 'Setiap Minggu, 08:00 WIB',
-      location: 'Balai Dusun Dlingo',
-      image: null
-    },
-    {
-      id: '2',
-      title: 'Pengajian Rutin',
-      slug: 'pengajian',
-      description: 'Kegiatan keagamaan rutin untuk meningkatkan keimanan dan ketakwaan warga.',
-      category: 'PENGAJIAN',
-      schedule: 'Setiap Jumat, 19:30 WIB',
-      location: 'Masjid Al-Ikhlas',
-      image: null
-    },
-    {
-      id: '3',
-      title: 'Kegiatan Karang Taruna',
-      slug: 'karang-taruna',
-      description: 'Program pemberdayaan pemuda untuk pengembangan kreativitas dan kegiatan sosial.',
-      category: 'KARANG_TARUNA',
-      schedule: 'Setiap Sabtu, 16:00 WIB',
-      location: 'Sekretariat Karang Taruna',
-      image: null
-    }
-  ]
-
-  const displayActivities = activities.length > 0 ? activities : defaultActivities
 
   return (
     <div className="py-12">
@@ -94,34 +62,9 @@ export default async function KegiatanPage() {
           ))}
         </div>
 
-        {/* Quick Links */}
-        <div className="grid md:grid-cols-3 gap-4 mb-12">
-          <Link href="/kegiatan/bank-sampah" className="card p-6 hover:shadow-md transition-all group bg-green-50 border-green-100">
-            <h3 className="font-semibold text-gray-900 group-hover:text-green-600 flex items-center justify-between">
-              Bank Sampah
-              <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-            <p className="text-sm text-gray-600 mt-1">Program pengelolaan sampah</p>
-          </Link>
-          <Link href="/kegiatan/pengajian" className="card p-6 hover:shadow-md transition-all group bg-blue-50 border-blue-100">
-            <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 flex items-center justify-between">
-              Pengajian
-              <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-            <p className="text-sm text-gray-600 mt-1">Kegiatan keagamaan rutin</p>
-          </Link>
-          <Link href="/kegiatan/karang-taruna" className="card p-6 hover:shadow-md transition-all group bg-amber-50 border-amber-100">
-            <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 flex items-center justify-between">
-              Karang Taruna
-              <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-            <p className="text-sm text-gray-600 mt-1">Program pemberdayaan pemuda</p>
-          </Link>
-        </div>
-
         {/* Activities Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayActivities.map((activity) => (
+          {activities.map((activity) => (
             <Link key={activity.id} href={`/kegiatan/${activity.slug}`} className="card group hover:shadow-md transition-shadow">
               <div className="aspect-video bg-gray-200 relative overflow-hidden">
                 {activity.image ? (
@@ -161,7 +104,7 @@ export default async function KegiatanPage() {
           ))}
         </div>
 
-        {displayActivities.length === 0 && (
+        {activities.length === 0 && (
           <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
             <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-4" />
             <p className="text-gray-500">Belum ada kegiatan</p>
